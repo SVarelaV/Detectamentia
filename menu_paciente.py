@@ -45,16 +45,16 @@ class GestionPacientes:
         frame_botones = tk.Frame(self.root, bg="#f0f8ff")
         frame_botones.pack(fill="x", padx=10, pady=10)
 
-        tk.Button(frame_botones, text="Agregar", command=self.agregar_paciente, bg="#007acc", fg="black").grid(row=0, column=0, padx=10, pady=10)
-        tk.Button(frame_botones, text="Buscar", command=self.buscar_paciente, bg="#007acc", fg="black").grid(row=0, column=1, padx=10, pady=10)
-        tk.Button(frame_botones, text="Eliminar", command=self.eliminar_paciente, bg="#007acc", fg="black").grid(row=0, column=2, padx=10, pady=10)
-        tk.Button(frame_botones, text="Mostrar", command=self.mostrar_pacientes, bg="#007acc", fg="black").grid(row=0, column=3, padx=10, pady=10)
+        tk.Button(frame_botones, text="Agregar", command=self.boton_agregar, bg="#007acc", fg="black").grid(row=0, column=0, padx=10, pady=10)
+        tk.Button(frame_botones, text="Buscar", command=self.boton_buscar, bg="#007acc", fg="black").grid(row=0, column=1, padx=10, pady=10)
+        tk.Button(frame_botones, text="Eliminar", command=self.boton_eliminar, bg="#007acc", fg="black").grid(row=0, column=2, padx=10, pady=10)
+        tk.Button(frame_botones, text="Mostrar", command=self.boton_mostrar, bg="#007acc", fg="black").grid(row=0, column=3, padx=10, pady=10)
 
         # Área de texto para mostrar pacientes
         self.text_area = tk.Text(self.root, height=10, width=70, state="disabled")
         self.text_area.pack(padx=10, pady=10)
 
-    def agregar_paciente(self):
+    def boton_agregar(self):
         id_paciente = self.id_entry.get()
         nombre = self.nombre_entry.get()
         apellido1 = self.apellido1_entry.get()
@@ -75,7 +75,7 @@ class GestionPacientes:
         messagebox.showinfo("Éxito", "Paciente agregado correctamente.")
         self.limpiar_campos()
 
-    def buscar_paciente(self):
+    def boton_buscar(self):
         id_paciente = self.id_entry.get()
 
         if not id_paciente:
@@ -88,7 +88,7 @@ class GestionPacientes:
         else:
             messagebox.showerror("Error", "Paciente no encontrado.")
 
-    def eliminar_paciente(self):
+    def boton_eliminar(self):
         id_paciente = self.id_entry.get()
 
         if not id_paciente:
@@ -97,10 +97,8 @@ class GestionPacientes:
 
         if self.lista_pacientes.eliminar_paciente(id_paciente):
             messagebox.showinfo("Éxito", "Paciente eliminado correctamente.")
-        else:
-            messagebox.showerror("Error", "Paciente no encontrado.")
 
-    def mostrar_pacientes(self):
+    def boton_mostrar(self):
         self.text_area.configure(state="normal")
         self.text_area.delete(1.0, tk.END)
 

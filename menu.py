@@ -1,7 +1,7 @@
 from paciente import Paciente
 from pacientes import Pacientes
 
-class GestionPacientesConsola:
+class GestionPacientes:
     def __init__(self):
         self.lista_pacientes = Pacientes()
 
@@ -80,5 +80,5 @@ class GestionPacientesConsola:
                 print("Opción no válida. Intente nuevamente.")
 
 if __name__ == "__main__":
-    gestion = GestionPacientesConsola()
+    gestion = GestionPacientes()
     gestion.ejecutar()

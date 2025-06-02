@@ -1,79 +1,132 @@
 class Informe:
-    def __init__(self, id_paciente, id_informe, fecha_registro, antece_familiar, enfer_previas, depresion_diag,
-                 accidente_cv, fumador, alcohol, actividad_fisica, trastorno_sueno, horas_sueno,
-                 calidad_sueno, nivel_estres, dieta_saludable, presion_arterial):
-        self._id_paciente = id_paciente
-        self._id_informe = id_informe
-        self._fecha_registro = fecha_registro
-        self._antece_familiar = antece_familiar
-        self._enfer_previas = enfer_previas
-        self._depresion_diag = depresion_diag
-        self._accidente_cv = accidente_cv
+    def __init__(self, id, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
+                hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular, trastornoSueno,
+                horaSueno, calidadSueno, fumador, consumoAlcohol, actividadFisica, nivelEstres,
+                dietaSaludable, presionArterialSis, presionArterialDia):
+        self._id = id
+        self._fechaRegistro = fechaRegistro
+        self._antecFamiliaresAlzheimer = antecFamiliaresAlzheimer
+        self._diabetes = diabetes
+        self._colesterol = colesterol
+        self._migrainas = migrainas
+        self._hipertension = hipertension
+        self._cardiopatia = cardiopatia
+        self._depresionDiag = depresionDiag
+        self._accidenteCerebrovascular = accidenteCerebrovascular
+        self._trastornoSueno = trastornoSueno
+        self._horaSueno = horaSueno
+        self._calidadSueno = calidadSueno
         self._fumador = fumador
-        self._alcohol = alcohol
-        self._actividad_fisica = actividad_fisica
-        self._trastorno_sueno = trastorno_sueno
-        self._horas_sueno = horas_sueno
-        self._calidad_sueno = calidad_sueno
-        self._nivel_estres = nivel_estres
-        self._dieta_saludable = dieta_saludable
-        self._presion_arterial = presion_arterial
+        self._consumoAlcohol = consumoAlcohol
+        self._actividadFisica = actividadFisica
+        self._nivelEstres = nivelEstres
+        self._dietaSaludable = dietaSaludable
+        self._presionArterialSis = presionArterialSis
+        self._presionArterialDia = presionArterialDia
 
     @property
-    def id_paciente(self):
-        return self._id_paciente
+    def id(self):
+        return self._id
 
-    @id_paciente.setter
-    def id_paciente(self, id_paciente):
-        self._id_paciente = id_paciente
-
-    @property
-    def id_informe(self):
-        return self._id_informe
-
-    @id_informe.setter
-    def id_informe(self, id_informe):
-        self._id_informe = id_informe
+    @id.setter
+    def id(self, id):
+        self._id = id
 
     @property
-    def fecha_registro(self):
-        return self._fecha_registro
+    def fechaRegistro(self):
+        return self._fechaRegistro
 
-    @fecha_registro.setter
-    def fecha_registro(self, fecha_registro):
-        self._fecha_registro = fecha_registro
-
-    @property
-    def antece_familiar(self):
-        return self._antece_familiar
-
-    @antece_familiar.setter
-    def antece_familiar(self, antece_familiar):
-        self._antece_familiar = antece_familiar
+    @fechaRegistro.setter
+    def fechaRegistro(self, fechaRegistro):
+        self._fechaRegistro = fechaRegistro
 
     @property
-    def enfer_previas(self):
-        return self._enfer_previas
+    def antecFamiliaresAlzheimer(self):
+        return self._antecFamiliaresAlzheimer
 
-    @enfer_previas.setter
-    def enfer_previas(self, enfer_previas):
-        self._enfer_previas = enfer_previas
-
-    @property
-    def depresion_diag(self):
-        return self._depresion_diag
-
-    @depresion_diag.setter
-    def depresion_diag(self, depresion_diag):
-        self._depresion_diag = depresion_diag
+    @antecFamiliaresAlzheimer.setter
+    def antecFamiliaresAlzheimer(self, antecFamiliaresAlzheimer):
+        self._antecFamiliaresAlzheimer = antecFamiliaresAlzheimer
 
     @property
-    def accidente_cv(self):
-        return self._accidente_cv
+    def diabetes(self):
+        return self._diabetes
 
-    @accidente_cv.setter
-    def accidente_cv(self, accidente_cv):
-        self._accidente_cv = accidente_cv
+    @diabetes.setter
+    def diabetes(self, diabetes):
+        self._diabetes = diabetes
+
+    @property
+    def colesterol(self):
+        return self._colesterol
+
+    @colesterol.setter
+    def colesterol(self, colesterol):
+        self._colesterol = colesterol
+
+    @property
+    def migrainas(self):
+        return self._migrainas
+
+    @migrainas.setter
+    def migrainas(self, migrainas):
+        self._migrainas = migrainas
+
+    @property
+    def hipertension(self):
+        return self._hipertension
+
+    @hipertension.setter
+    def hipertension(self, hipertension):
+        self._hipertension = hipertension
+
+    @property
+    def cardiopatia(self):
+        return self._cardiopatia
+
+    @cardiopatia.setter
+    def cardiopatia(self, cardiopatia):
+        self._cardiopatia = cardiopatia
+
+    @property
+    def depresionDiag(self):
+        return self._depresionDiag
+
+    @depresionDiag.setter
+    def depresionDiag(self, depresionDiag):
+        self._depresionDiag = depresionDiag
+
+    @property
+    def accidenteCerebrovascular(self):
+        return self._accidenteCerebrovascular
+
+    @accidenteCerebrovascular.setter
+    def accidenteCerebrovascular(self, accidenteCerebrovascular):
+        self._accidenteCerebrovascular = accidenteCerebrovascular
+
+    @property
+    def trastornoSueno(self):
+        return self._trastornoSueno
+
+    @trastornoSueno.setter
+    def trastornoSueno(self, trastornoSueno):
+        self._trastornoSueno = trastornoSueno
+
+    @property
+    def horaSueno(self):
+        return self._horaSueno
+
+    @horaSueno.setter
+    def horaSueno(self, horaSueno):
+        self._horaSueno = horaSueno
+
+    @property
+    def calidadSueno(self):
+        return self._calidadSueno
+
+    @calidadSueno.setter
+    def calidadSueno(self, calidadSueno):
+        self._calidadSueno = calidadSueno
 
     @property
     def fumador(self):
@@ -84,65 +137,49 @@ class Informe:
         self._fumador = fumador
 
     @property
-    def alcohol(self):
-        return self._alcohol
+    def consumoAlcohol(self):
+        return self._consumoAlcohol
 
-    @alcohol.setter
-    def alcohol(self, alcohol):
-        self._alcohol = alcohol
-
-    @property
-    def actividad_fisica(self):
-        return self._actividad_fisica
-
-    @actividad_fisica.setter
-    def actividad_fisica(self, actividad_fisica):
-        self._actividad_fisica = actividad_fisica
+    @consumoAlcohol.setter
+    def consumoAlcohol(self, consumoAlcohol):
+        self._consumoAlcohol = consumoAlcohol
 
     @property
-    def trastorno_sueno(self):
-        return self._trastorno_sueno
+    def actividadFisica(self):
+        return self._actividadFisica
 
-    @trastorno_sueno.setter
-    def trastorno_sueno(self, trastorno_sueno):
-        self._trastorno_sueno = trastorno_sueno
-
-    @property
-    def horas_sueno(self):
-        return self._horas_sueno
-
-    @horas_sueno.setter
-    def horas_sueno(self, horas_sueno):
-        self._horas_sueno = horas_sueno
+    @actividadFisica.setter
+    def actividadFisica(self, actividadFisica):
+        self._actividadFisica = actividadFisica
 
     @property
-    def calidad_sueno(self):
-        return self._calidad_sueno
+    def nivelEstres(self):
+        return self._nivelEstres
 
-    @calidad_sueno.setter
-    def calidad_sueno(self, calidad_sueno):
-        self._calidad_sueno = calidad_sueno
-
-    @property
-    def nivel_estres(self):
-        return self._nivel_estres
-
-    @nivel_estres.setter
-    def nivel_estres(self, nivel_estres):
-        self._nivel_estres = nivel_estres
+    @nivelEstres.setter
+    def nivelEstres(self, nivelEstres):
+        self._nivelEstres = nivelEstres
 
     @property
-    def dieta_saludable(self):
-        return self._dieta_saludable
+    def dietaSaludable(self):
+        return self._dietaSaludable
 
-    @dieta_saludable.setter
-    def dieta_saludable(self, dieta_saludable):
-        self._dieta_saludable = dieta_saludable
+    @dietaSaludable.setter
+    def dietaSaludable(self, dietaSaludable):
+        self._dietaSaludable = dietaSaludable
 
     @property
-    def presion_arterial(self):
-        return self._presion_arterial
+    def presionArterialSis(self):
+        return self._presionArterialSis
 
-    @presion_arterial.setter
-    def presion_arterial(self, presion_arterial):
-        self._presion_arterial = presion_arterial
+    @presionArterialSis.setter
+    def presionArterialSis(self, presionArterialSis):
+        self._presionArterialSis = presionArterialSis
+
+    @property
+    def presionArterialDia(self):
+        return self._presionArterialDia
+
+    @presionArterialDia.setter
+    def presionArterialDia(self, presionArterialDia):
+        self._presionArterialDia = presionArterialDia

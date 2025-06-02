@@ -1,19 +1,22 @@
 class Paciente:
-    def __init__(self, id_paciente, nombre, apellido1, apellido2, fecha_nacimiento, genero):
-        self._id_paciente = id_paciente
+    def __init__(self, id, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios):
+        self._id = id
         self._nombre = nombre
         self._apellido1 = apellido1
         self._apellido2 = apellido2
-        self._fechaNac = fecha_nacimiento
         self._genero = genero
+        self._edad = edad
+        self._poblacion = poblacion
+        self._ocupacion = ocupacion
+        self._nivelEstudios = nivelEstudios
 
     @property
-    def id_paciente(self):
-        return self._id_paciente
+    def id(self):
+        return self._id
 
-    @id_paciente.setter
-    def id_paciente(self, id_paciente):
-        self._id_paciente = id_paciente
+    @id.setter
+    def id(self, id):
+        self._id = id
 
     @property
     def nombre(self):
@@ -40,17 +43,41 @@ class Paciente:
         self._apellido2 = apellido2
 
     @property
-    def fecha_nacimiento(self):
-        return self._fechaNac
-
-    @fecha_nacimiento.setter
-    def fecha_nacimiento(self, fecha_nacimiento):
-        self._fechaNac = fecha_nacimiento
-
-    @property
     def genero(self):
         return self._genero
 
     @genero.setter
     def genero(self, genero):
         self._genero = genero
+
+    @property
+    def edad(self):
+        return self._edad
+
+    @edad.setter
+    def edad(self, edad):
+        self._edad = edad
+
+    @property
+    def poblacion(self):
+        return self._poblacion
+
+    @poblacion.setter
+    def poblacion(self, poblacion):
+        self._poblacion = poblacion 
+
+    @property
+    def ocupacion(self):
+        return self._ocupacion
+
+    @ocupacion.setter
+    def ocupacion(self, ocupacion):
+        self._ocupacion = ocupacion
+
+    @property
+    def nivelEstudios(self):
+        return self._nivelEstudios
+
+    @nivelEstudios.setter
+    def nivelEstudios(self, nivelEstudios):
+        self._nivelEstudios = nivelEstudios

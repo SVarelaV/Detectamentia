@@ -1,4 +1,0 @@
-12,qw,as,qqq
-111,aaa,sss,ñññ
-123,sonia,varela,zzz
-876,pepa,pig,vvv

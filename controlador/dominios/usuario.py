@@ -1,17 +1,21 @@
 class Usuario:
-    def __init__(self, dni, nombre, apellido, passwd):
-        self._dni = dni
+    def __init__(self, id, nombre, apellido1, apellido2, passwd, rol, email, activo):
+        self._id = id
         self._nombre = nombre
-        self._apellido = apellido
+        self._apellido1 = apellido1
+        self._apellido2 = apellido2
         self._passwd = passwd
+        self._rol = rol
+        self._email = email
+        self._activo = activo
 
     @property
-    def dni(self):
-        return self._dni
+    def id(self):
+        return self._id
 
-    @dni.setter
-    def dni(self, dni):
-        self._dni = dni
+    @id.setter
+    def id(self, id):
+        self._id = id
 
     @property
     def nombre(self):
@@ -22,12 +26,20 @@ class Usuario:
         self._nombre = nombre
 
     @property
-    def apellido(self):
-        return self._apellido
+    def apellido1(self):
+        return self._apellido1
 
-    @apellido.setter
-    def apellido(self, apellido):
-        self._apellido = apellido
+    @apellido1.setter
+    def apellido1(self, apellido1):
+        self._apellido1 = apellido1
+
+    @property
+    def apellido2(self):
+        return self._apellido2
+
+    @apellido2.setter
+    def apellido2(self, apellido2):
+        self._apellido2 = apellido2
 
     @property
     def passwd(self):
@@ -36,3 +48,27 @@ class Usuario:
     @passwd.setter
     def passwd(self, passwd):
         self._passwd = passwd
+
+    @property
+    def rol(self):
+        return self._rol
+
+    @rol.setter
+    def rol(self, rol):
+        self._rol = rol
+
+    @property
+    def email(self):
+        return self._email
+
+    @email.setter
+    def email(self, email):
+        self._email = email
+
+    @property
+    def activo(self):
+        return self._activo
+
+    @activo.setter
+    def activo(self, activo):
+        self._activo = activo

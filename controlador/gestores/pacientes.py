@@ -5,8 +5,13 @@ from controlador.gestores.listagen import ListaGen
 class Pacientes(ListaGen[Paciente]):
     """
     Clase especializada para manejar la lista de pacientes.
-    (Por ahora hereda todo de ListaGen sin necesidad de modificar)
     """
-    pass
+    
+    def __init__(self):
+        """
+        Inicializa la lista de pacientes.
+        """
+        super().__init__()
+
 
 

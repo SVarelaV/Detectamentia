@@ -21,7 +21,7 @@ class GestorPacientes:
         print("="*50)
         print("1. ➕ Agregar paciente")
         print("2. 🔍 Buscar paciente por ID")
-        print("3. 🗑️  Eliminar paciente por ID")
+        print("3. 🗑️ Eliminar paciente por ID")
         print("4. 📋 Mostrar todos los pacientes")
         print("5. 🚪 Salir")
         print("="*50)
@@ -29,7 +29,7 @@ class GestorPacientes:
     def mostrar_paciente(self, paciente: Paciente):
         """Imprime los datos de un paciente con íconos."""
         print(f"👤 ID: {paciente.id} | {paciente.nombre} {paciente.apellido1} {paciente.apellido2} | {paciente.edad} años | "
-              f" {paciente.poblacion} | {paciente.ocupacion} | {paciente.nivelEstudios}")
+            f" {paciente.poblacion} | {paciente.ocupacion} | {paciente.nivelEstudios}")
 
     def ejecutar(self):
         """Ejecuta el ciclo principal de interacción."""

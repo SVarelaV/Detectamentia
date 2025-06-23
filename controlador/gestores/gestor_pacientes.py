@@ -2,12 +2,28 @@ from controlador.dominios.paciente import Paciente
 from controlador.gestores.pacientes import Pacientes
 
 
+
 class GestorPacientes:
     """Gestor que maneja las operaciones sobre pacientes."""
 
-    def __init__(self):
+    def __init__(self, cargar_ejemplos=True):
         self.lista_pacientes = Pacientes()
-        self._cargar_ejemplos()
+        if cargar_ejemplos:
+            self._cargar_ejemplos()
+
+    def agregar(self, paciente):
+        """
+        Agrega un nuevo paciente a la lista con validaciones de datos y duplicados.
+        Lanza una excepción si los datos no son válidos o el paciente ya existe.
+        """
+        # Validación de datos
+        if not paciente._id or not paciente._nombre or paciente._edad is None or paciente._edad < 0:
+            raise Exception("Datos inválidos para el paciente")
+        # Validación de duplicados
+        if any(p._id == paciente._id for p in self.lista_pacientes._elementos):
+            raise Exception("Paciente duplicado")
+        self.lista_pacientes.agregar(paciente)
+        return True
 
     def _cargar_ejemplos(self):
         """Carga algunos pacientes de ejemplo."""
@@ -54,21 +70,25 @@ class GestorPacientes:
     def _agregar_paciente(self):
         try:
             print("\n➕ Agregar nuevo paciente")
-            id = int(input("ID: "))
+            id_str = input("ID: ")
+            if not id_str.isdigit():
+                raise ValueError("El ID debe ser un número entero.")
+            id = int(id_str)
             nombre = input("Nombre: ")
             apellido1 = input("Primer apellido: ")
             apellido2 = input("Segundo apellido: ")
             genero = input("Género: ")
-            edad = int(input("Edad: "))
+            edad_str = input("Edad: ")
+            if not edad_str.isdigit():
+                raise ValueError("La edad debe ser un número entero.")
+            edad = int(edad_str)
             poblacion = input("Población: ")
             ocupacion = input("Ocupación: ")
             nivelEstudios = input("Nivel de estudios: ")
 
             paciente = Paciente(id, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
-            if self.lista_pacientes.agregar(paciente):
-                print("✅ Paciente agregado correctamente.")
-            else:
-                print("⚠️ Ya existe un paciente con ese ID.")
+            self.agregar(paciente)
+            print("✅ Paciente agregado correctamente.")
         except Exception as e:
             print(f"❌ Error al agregar paciente: {e}")
 

@@ -11,6 +11,25 @@ class GestorUsuarios:
         self.usuarios = Usuarios()
         self._cargar_ejemplos()
 
+    def agregar(self, usuario):
+        # Validación de campos obligatorios
+        if not usuario.nombre or not usuario.apellido1 or not usuario.email or not usuario.passwd:
+            raise Exception("Faltan datos obligatorios")
+        # Validación de email único
+        if any(u.email == usuario.email for u in self.usuarios._elementos):
+            raise Exception("Email duplicado")
+        # Validación de rol
+        if usuario.rol not in ("paciente", "profesional"):
+            raise Exception("Rol no válido")
+        # Validación de contraseña
+        if len(usuario.passwd) < 4:
+            raise Exception("Contraseña demasiado corta")
+        # Validación de duplicados por ID
+        if any(u.id == usuario.id for u in self.usuarios._elementos):
+            raise Exception("Usuario duplicado")
+        self.usuarios._elementos.append(usuario)
+        return True
+
     def _cargar_ejemplos(self):
         """Carga usuarios de ejemplo."""
         self.usuarios.agregar(Usuario(1, "Laura", "Sánchez", "Gómez", "clave123", "profesional", "laura@example.com", True))
@@ -21,7 +40,7 @@ class GestorUsuarios:
         print("=" * 50)
         print("1. ➕ Agregar usuario")
         print("2. 🔍 Buscar usuario por ID")
-        print("3. 🗑️  Eliminar usuario por ID")
+        print("3. 🗑️ Eliminar usuario por ID")
         print("4. 📧 Buscar por email")
         print("5. 🎭 Buscar por rol")
         print("6. 📋 Mostrar todos los usuarios")

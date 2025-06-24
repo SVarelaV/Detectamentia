@@ -112,3 +112,4 @@ if __name__ == "__main__":
     test_eliminar_usuario_existente()
     test_eliminar_usuario_inexistente()
     test_mostrar_todos()
+    print("🎉 Todas las pruebas pasaron correctamente.")

@@ -23,7 +23,7 @@ class GestorInformes:
         print("=" * 60)
         print("1. ➕ Agregar informe")
         print("2. 🔍 Buscar informe por ID")
-        print("3. 🗑️  Eliminar informe por ID")
+        print("3. 🗑️ Eliminar informe por ID")
         print("4. 📋 Mostrar todos los informes")
         print("5. 🚪 Salir")
         print("=" * 60)
@@ -50,27 +50,35 @@ class GestorInformes:
             else:
                 print("❌ Opción no válida. Intenta de nuevo.")
 
+    def agregar_informe(self, informe):
+        """Agrega un informe solo si no existe otro con el mismo ID."""
+        if self.informes.buscar(informe.id) is not None:
+            raise Exception("Informe duplicado")
+        # Aquí podrías agregar más validaciones de datos si lo necesitas
+        self.informes.agregar(informe)
+        return True
+
     def _agregar_informe(self):
         try:
             print("\n➕ Agregar nuevo informe")
             id = int(input("ID: "))
             fecha = input("Fecha de registro (DD-MM-YYYY): ")
-            antec = int(input("Antecedentes familiares Alzheimer (1/0): "))
-            diabetes = int(input("Diabetes (1/0): "))
-            colesterol = int(input("Colesterol (1/0): "))
+            antec = int(input("Antecedentes familiares Alzheimer (1: Sí, 0: No): "))
+            diabetes = int(input("Diabetes (1: Sí, 0: No): "))
+            colesterol = int(input("Colesterol (1: Sí, 0: No): "))
             migrainas = int(input("Migrainas (0: Nunca, 1: Ocasional, 2: Frecuente): "))
-            hipertension = int(input("Hipertensión (1/0): "))
-            cardiopatia = int(input("Cardiopatía (1/0): "))
-            depresion = int(input("Depresión diagnosticada (1/0): "))
+            hipertension = int(input("Hipertensión (1: Sí, 0: No): "))
+            cardiopatia = int(input("Cardiopatía (1: Sí, 0: No): "))
+            depresion = int(input("Depresión diagnosticada (1: Sí, 0: No): "))
             acv = int(input("ACV (0 si no, o número de episodios): "))
-            trastorno_sueno = int(input("Trastorno del sueño (1/0): "))
+            trastorno_sueno = int(input("Trastorno del sueño (1: Sí, 0: No): "))
             horas_sueno = float(input("Horas de sueño: "))
             calidad_sueno = int(input("Calidad del sueño (0: Mala, 1: Regular, 2: Buena): "))
-            fumador = int(input("Fumador (1/0): "))
+            fumador = int(input("Fumador (1: Sí, 0: No): "))
             alcohol = int(input("Consumo de alcohol (0: Nunca, 1: Ocasional, 2: Frecuente): "))
             actividad = int(input("Actividad física (0: Sedentario, 1: Moderado, 2: Activo): "))
             estres = int(input("Nivel de estrés (1-10): "))
-            dieta = int(input("Dieta saludable (1/0): "))
+            dieta = int(input("Dieta saludable (1: Sí, 0: No): "))
             presion_sis = int(input("Presión sistólica: "))
             presion_dia = int(input("Presión diastólica: "))
 
@@ -79,10 +87,8 @@ class GestorInformes:
                             calidad_sueno, fumador, alcohol, actividad, estres,
                             dieta, presion_sis, presion_dia)
 
-            if self.informes.agregar(nuevo):
-                print("✅ Informe agregado correctamente.")
-            else:
-                print("⚠️ Ya existe un informe con ese ID.")
+            self.agregar_informe(nuevo)
+            print("✅ Informe agregado correctamente.")
         except Exception as e:
             print(f"❌ Error al agregar informe: {e}")
 

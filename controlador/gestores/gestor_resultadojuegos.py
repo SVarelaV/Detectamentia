@@ -15,12 +15,20 @@ class GestorResultadoJuegos:
         self.resultados.agregar(ResultadoJuego(1, "Stroop Test", "01-06-2025", 1.2, 10, 2, 0, 30.5))
         self.resultados.agregar(ResultadoJuego(2, "N-back", "04-06-2025", 1.8, 12, 1, 0, 45.2))
 
+    def agregar_resultado(self, resultado):
+        """Agrega un resultado solo si no existe otro con el mismo ID."""
+        if self.resultados.buscar(resultado.id) is not None:
+            raise Exception("Resultado duplicado")
+        # Aquí puedes agregar más validaciones si lo necesitas
+        self.resultados.agregar(resultado)
+        return True
+
     def mostrar_menu(self):
         print("\n🎮 GESTOR DE RESULTADOS DE JUEGOS")
         print("=" * 50)
         print("1. ➕ Agregar resultado de juego")
         print("2. 🔍 Buscar resultado por ID")
-        print("3. 🗑️  Eliminar resultado por ID")
+        print("3. 🗑️ Eliminar resultado por ID")
         print("4. 📋 Mostrar todos los resultados")
         print("5. 🚪 Salir")
         print("=" * 50)
@@ -60,12 +68,12 @@ class GestorResultadoJuegos:
             total = float(input("Tiempo total (s): "))
 
             nuevo = ResultadoJuego(id, juego, fecha, reaccion, aciertos, errores, intentos, total)
-            if self.resultados.agregar(nuevo):
-                print("✅ Resultado agregado.")
-            else:
-                print("⚠️ Ya existe un resultado con ese ID.")
+            self.agregar_resultado(nuevo)
+            print("✅ Resultado agregado.")
         except Exception as e:
             print(f"❌ Error al agregar: {e}")
+
+
 
     def _buscar_resultado(self):
         try:

@@ -11,15 +11,21 @@ class GestorResultadoJuegos:
         self._cargar_ejemplos()
 
     def _cargar_ejemplos(self):
-        """Carga datos de prueba."""
+        """Carga datos de prueba solo con los juegos permitidos."""
         self.resultados.agregar(ResultadoJuego(1, "Stroop Test", "01-06-2025", 1.2, 10, 2, 0, 30.5))
         self.resultados.agregar(ResultadoJuego(2, "N-back", "04-06-2025", 1.8, 12, 1, 0, 45.2))
+        self.resultados.agregar(ResultadoJuego(3, "Par", "07-06-2025", 2.5, 8, 3, 1, 50.0))
+        self.resultados.agregar(ResultadoJuego(4, "Stroop Test", "10-06-2025", 1.1, 11, 1, 0, 29.8))
+        self.resultados.agregar(ResultadoJuego(5, "N-back", "12-06-2025", 2.2, 7, 5, 1, 60.0))
+        self.resultados.agregar(ResultadoJuego(6, "Par", "15-06-2025", 1.9, 13, 2, 0, 48.7))
+        self.resultados.agregar(ResultadoJuego(7, "Stroop Test", "18-06-2025", 1.3, 9, 4, 2, 55.3))
+        self.resultados.agregar(ResultadoJuego(8, "N-back", "20-06-2025", 1.7, 15, 0, 0, 40.0))
+        self.resultados.agregar(ResultadoJuego(9, "Par", "22-06-2025", 2.0, 10, 3, 1, 52.1))
 
     def agregar_resultado(self, resultado):
         """Agrega un resultado solo si no existe otro con el mismo ID."""
         if self.resultados.buscar(resultado.id) is not None:
             raise Exception("Resultado duplicado")
-        # Aquí puedes agregar más validaciones si lo necesitas
         self.resultados.agregar(resultado)
         return True
 
@@ -28,7 +34,7 @@ class GestorResultadoJuegos:
         print("=" * 50)
         print("1. ➕ Agregar resultado de juego")
         print("2. 🔍 Buscar resultado por ID")
-        print("3. 🗑️ Eliminar resultado por ID")
+        print("3. 🗑️  Eliminar resultado por ID")
         print("4. 📋 Mostrar todos los resultados")
         print("5. 🚪 Salir")
         print("=" * 50)

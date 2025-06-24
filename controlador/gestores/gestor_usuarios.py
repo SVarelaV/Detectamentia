@@ -12,19 +12,7 @@ class GestorUsuarios:
         self._cargar_ejemplos()
 
     def agregar(self, usuario):
-        # Validación de campos obligatorios
-        if not usuario.nombre or not usuario.apellido1 or not usuario.email or not usuario.passwd:
-            raise Exception("Faltan datos obligatorios")
-        # Validación de email único
-        if any(u.email == usuario.email for u in self.usuarios._elementos):
-            raise Exception("Email duplicado")
-        # Validación de rol
-        if usuario.rol not in ("paciente", "profesional"):
-            raise Exception("Rol no válido")
-        # Validación de contraseña
-        if len(usuario.passwd) < 4:
-            raise Exception("Contraseña demasiado corta")
-        # Validación de duplicados por ID
+        # Solo validación de duplicados por ID
         if any(u.id == usuario.id for u in self.usuarios._elementos):
             raise Exception("Usuario duplicado")
         self.usuarios._elementos.append(usuario)
@@ -34,13 +22,21 @@ class GestorUsuarios:
         """Carga usuarios de ejemplo."""
         self.usuarios.agregar(Usuario(1, "Laura", "Sánchez", "Gómez", "clave123", "profesional", "laura@example.com", True))
         self.usuarios.agregar(Usuario(2, "Carlos", "Ruiz", "Díaz", "pass456", "paciente", "carlos@example.com", True))
+        self.usuarios.agregar(Usuario(3, "Marta", "López", "Fernández", "marta2025", "profesional", "marta.lopez@example.com", True))
+        self.usuarios.agregar(Usuario(4, "Pedro", "Martínez", "Santos", "pedro321", "paciente", "pedro.martinez@example.com", False))
+        self.usuarios.agregar(Usuario(5, "Ana", "García", "Moreno", "ana456", "profesional", "ana.garcia@example.com", True))
+        self.usuarios.agregar(Usuario(6, "Luis", "Torres", "Navarro", "luispass", "paciente", "luis.torres@example.com", True))
+        self.usuarios.agregar(Usuario(7, "Elena", "Jiménez", "Romero", "elena789", "profesional", "elena.jimenez@example.com", False))
+        self.usuarios.agregar(Usuario(8, "Javier", "Hernández", "Molina", "javierpass", "paciente", "javier.hernandez@example.com", True))
+        self.usuarios.agregar(Usuario(9, "Sofía", "Castro", "Ortega", "sofia123", "profesional", "sofia.castro@example.com", True))
+        self.usuarios.agregar(Usuario(10, "Miguel", "Serrano", "Vega", "miguelpass", "paciente", "miguel.serrano@example.com", False))
 
     def mostrar_menu(self):
         print("\n👥 GESTOR DE USUARIOS")
         print("=" * 50)
         print("1. ➕ Agregar usuario")
         print("2. 🔍 Buscar usuario por ID")
-        print("3. 🗑️ Eliminar usuario por ID")
+        print("3. 🗑️  Eliminar usuario por ID")
         print("4. 📧 Buscar por email")
         print("5. 🎭 Buscar por rol")
         print("6. 📋 Mostrar todos los usuarios")
@@ -116,21 +112,27 @@ class GestorUsuarios:
             print("❌ Entrada inválida.")
 
     def _buscar_por_email(self):
-        email = input("📧 Email del usuario: ")
-        u = self.usuarios.buscar_por_email(email)
-        if u:
-            self.mostrar_usuario(u)
-        else:
-            print("❌ No se encontró usuario con ese email.")
+        try:
+            email = input("📧 Email del usuario: ")
+            u = self.usuarios.buscar_por_email(email)
+            if u:
+                self.mostrar_usuario(u)
+            else:
+                print("❌ No se encontró usuario con ese email.")
+        except Exception:
+            print("❌ Entrada inválida.")
 
     def _buscar_por_rol(self):
-        rol = input("🎭 Rol a buscar (paciente/profesional): ")
-        lista = self.usuarios.buscar_por_rol(rol)
-        if lista:
-            for u in lista:
-                self.mostrar_usuario(u)
-        else:
-            print("❌ No se encontraron usuarios con ese rol.")
+        try:
+            rol = input("🎭 Rol a buscar (paciente/profesional): ")
+            lista = self.usuarios.buscar_por_rol(rol)
+            if lista:
+                for u in lista:
+                    self.mostrar_usuario(u)
+            else:
+                print("❌ No se encontraron usuarios con ese rol.")
+        except Exception:
+            print("❌ Entrada inválida.")
 
     def _mostrar_todos(self):
         print("\n📋 Lista de todos los usuarios:")

@@ -53,35 +53,6 @@ def test_mostrar_todos():
     assert isinstance(usuarios, list)
     print("✅ Mostrar todos los usuarios funciona correctamente")
 
-def test_agregar_usuario_email_duplicado():
-    gestor = GestorUsuarios()
-    usuario1 = Usuario(200, "Pepe", "García", "López", "clave", "paciente", "pepe@example.com", True)
-    usuario2 = Usuario(201, "Pepa", "García", "López", "clave", "paciente", "pepe@example.com", True)
-    gestor.agregar(usuario1)
-    try:
-        gestor.agregar(usuario2)
-        print("❌ Error esperado: Se permitió agregar usuario con email duplicado")
-    except Exception as e:
-        print("✅ Error capturado al agregar email duplicado:", str(e))
-
-def test_agregar_usuario_rol_invalido():
-    gestor = GestorUsuarios()
-    usuario = Usuario(202, "Luis", "Martín", "Soto", "clave", "admin", "luis@example.com", True)
-    try:
-        gestor.agregar(usuario)
-        print("❌ Error esperado: Se permitió agregar usuario con rol inválido")
-    except Exception as e:
-        print("✅ Error capturado al agregar rol inválido:", str(e))
-
-def test_agregar_usuario_contrasena_corta():
-    gestor = GestorUsuarios()
-    usuario = Usuario(203, "Ana", "Ruiz", "Gómez", "123", "paciente", "ana2@example.com", True)
-    try:
-        gestor.agregar(usuario)
-        print("❌ Error esperado: Se permitió agregar usuario con contraseña corta")
-    except Exception as e:
-        print("✅ Error capturado al agregar contraseña corta:", str(e))
-
 def test_buscar_usuario_por_email():
     gestor = GestorUsuarios()
     usuario = Usuario(204, "Eva", "López", "Martínez", "clave", "profesional", "eva@example.com", True)
@@ -102,9 +73,6 @@ def test_buscar_usuario_por_rol():
 if __name__ == "__main__":
     test_agregar_usuario_valido()
     test_agregar_usuario_duplicado()
-    test_agregar_usuario_email_duplicado()
-    test_agregar_usuario_rol_invalido()
-    test_agregar_usuario_contrasena_corta()
     test_buscar_usuario_existente()
     test_buscar_usuario_inexistente()
     test_buscar_usuario_por_email()

@@ -18,42 +18,6 @@ def test_agregar_paciente_duplicado():
     except Exception as e:
         print("✅ Error capturado al agregar duplicado:", str(e))
 
-def test_agregar_paciente_datos_invalidos():
-    gestor = GestorPacientes()
-    try:
-        paciente = Paciente(None, "", "", "", "Otro", -5, "", "Desempleado", "Sin escolarización")
-        gestor.agregar(paciente)
-        print("❌ Error esperado: Se permitió paciente con datos inválidos")
-    except Exception as e:
-        print("✅ Error capturado al ingresar datos inválidos:", str(e))
-
-def test_agregar_paciente_id_vacio():
-    gestor = GestorPacientes()
-    try:
-        paciente = Paciente("", "Luis", "Sánchez", "Díaz", "Masculino", 60, "Valencia", "Jubilado", "Secundaria")
-        gestor.agregar(paciente)
-        print("❌ Error esperado: Se permitió paciente con ID vacío")
-    except Exception as e:
-        print("✅ Error capturado al ingresar ID vacío:", str(e))
-
-def test_agregar_paciente_edad_negativa():
-    gestor = GestorPacientes()
-    try:
-        paciente = Paciente(103, "Marta", "García", "López", "Femenino", -1, "Bilbao", "Desempleada", "Primaria")
-        gestor.agregar(paciente)
-        print("❌ Error esperado: Se permitió paciente con edad negativa")
-    except Exception as e:
-        print("✅ Error capturado al ingresar edad negativa:", str(e))
-
-def test_agregar_paciente_nombre_vacio():
-    gestor = GestorPacientes()
-    try:
-        paciente = Paciente(104, "", "Fernández", "Ruiz", "Masculino", 55, "Granada", "Jubilado", "Secundaria")
-        gestor.agregar(paciente)
-        print("❌ Error esperado: Se permitió paciente con nombre vacío")
-    except Exception as e:
-        print("✅ Error capturado al ingresar nombre vacío:", str(e))
-
 def test_agregar_paciente_id_duplicado_datos_diferentes():
     gestor = GestorPacientes()
     paciente1 = Paciente(105, "Carlos", "Martín", "Soto", "Masculino", 80, "Madrid", "Jubilado", "Universidad")
@@ -103,10 +67,6 @@ def test_mostrar_todos():
 if __name__ == "__main__":
     test_agregar_paciente_valido()
     test_agregar_paciente_duplicado()
-    test_agregar_paciente_datos_invalidos()
-    test_agregar_paciente_id_vacio()
-    test_agregar_paciente_edad_negativa()
-    test_agregar_paciente_nombre_vacio()
     test_agregar_paciente_id_duplicado_datos_diferentes()
     test_buscar_paciente_existente()
     test_buscar_paciente_inexistente()

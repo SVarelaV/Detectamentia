@@ -13,13 +13,10 @@ class GestorPacientes:
 
     def agregar(self, paciente):
         """
-        Agrega un nuevo paciente a la lista con validaciones de datos y duplicados.
-        Lanza una excepción si los datos no son válidos o el paciente ya existe.
+        Agrega un nuevo paciente a la lista solo si no existe otro con el mismo ID.
+        Lanza una excepción si el paciente ya existe.
         """
-        # Validación de datos
-        if not paciente._id or not paciente._nombre or paciente._edad is None or paciente._edad < 0:
-            raise Exception("Datos inválidos para el paciente")
-        # Validación de duplicados
+        # Solo validación de duplicados
         if any(p._id == paciente._id for p in self.lista_pacientes._elementos):
             raise Exception("Paciente duplicado")
         self.lista_pacientes.agregar(paciente)
@@ -29,6 +26,14 @@ class GestorPacientes:
         """Carga algunos pacientes de ejemplo."""
         self.lista_pacientes.agregar(Paciente(1, "Juan", "Pérez", "Gómez", "Masculino", 72, "Madrid", "Jubilado", "Secundaria completa"))
         self.lista_pacientes.agregar(Paciente(2, "Ana", "López", "Martínez", "Femenino", 68, "Barcelona", "Ama de casa", "Primaria completa"))
+        self.lista_pacientes.agregar(Paciente(3, "Luis", "Martín", "Soto", "Masculino", 80, "Valencia", "Jubilado", "Universidad"))
+        self.lista_pacientes.agregar(Paciente(4, "Carmen", "Ruiz", "Díaz", "Femenino", 75, "Sevilla", "Jubilada", "Secundaria"))
+        self.lista_pacientes.agregar(Paciente(5, "Pedro", "García", "Fernández", "Masculino", 65, "Bilbao", "Comerciante", "Primaria"))
+        self.lista_pacientes.agregar(Paciente(6, "Lucía", "Sánchez", "Moreno", "Femenino", 70, "Granada", "Profesora", "Universidad"))
+        self.lista_pacientes.agregar(Paciente(7, "Miguel", "Torres", "Navarro", "Masculino", 60, "Zaragoza", "Ingeniero", "Universidad"))
+        self.lista_pacientes.agregar(Paciente(8, "Isabel", "Jiménez", "Romero", "Femenino", 73, "Valladolid", "Jubilada", "Secundaria"))
+        self.lista_pacientes.agregar(Paciente(9, "Antonio", "Hernández", "Molina", "Masculino", 69, "Alicante", "Agricultor", "Primaria"))
+        self.lista_pacientes.agregar(Paciente(10, "María", "Castro", "Ortega", "Femenino", 67, "Córdoba", "Ama de casa", "Primaria completa"))
 
     def mostrar_menu(self):
         """Muestra el menú de opciones."""
@@ -37,13 +42,13 @@ class GestorPacientes:
         print("="*50)
         print("1. ➕ Agregar paciente")
         print("2. 🔍 Buscar paciente por ID")
-        print("3. 🗑️ Eliminar paciente por ID")
+        print("3. 🗑️  Eliminar paciente por ID")
         print("4. 📋 Mostrar todos los pacientes")
         print("5. 🚪 Salir")
         print("="*50)
 
     def mostrar_paciente(self, paciente: Paciente):
-        """Imprime los datos de un paciente con íconos."""
+        """Imprime los datos de un paciente."""
         print(f"👤 ID: {paciente.id} | {paciente.nombre} {paciente.apellido1} {paciente.apellido2} | {paciente.edad} años | "
             f" {paciente.poblacion} | {paciente.ocupacion} | {paciente.nivelEstudios}")
 
@@ -68,29 +73,20 @@ class GestorPacientes:
                 print("❌ Opción inválida. Intenta de nuevo.")
 
     def _agregar_paciente(self):
-        try:
-            print("\n➕ Agregar nuevo paciente")
-            id_str = input("ID: ")
-            if not id_str.isdigit():
-                raise ValueError("El ID debe ser un número entero.")
-            id = int(id_str)
-            nombre = input("Nombre: ")
-            apellido1 = input("Primer apellido: ")
-            apellido2 = input("Segundo apellido: ")
-            genero = input("Género: ")
-            edad_str = input("Edad: ")
-            if not edad_str.isdigit():
-                raise ValueError("La edad debe ser un número entero.")
-            edad = int(edad_str)
-            poblacion = input("Población: ")
-            ocupacion = input("Ocupación: ")
-            nivelEstudios = input("Nivel de estudios: ")
+        print("\n➕ Agregar nuevo paciente")
+        id = int(input("ID: "))
+        nombre = input("Nombre: ")
+        apellido1 = input("Primer apellido: ")
+        apellido2 = input("Segundo apellido: ")
+        genero = input("Género: ")
+        edad = int(input("Edad: "))
+        poblacion = input("Población: ")
+        ocupacion = input("Ocupación: ")
+        nivelEstudios = input("Nivel de estudios: ")
 
-            paciente = Paciente(id, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
-            self.agregar(paciente)
-            print("✅ Paciente agregado correctamente.")
-        except Exception as e:
-            print(f"❌ Error al agregar paciente: {e}")
+        paciente = Paciente(id, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
+        self.agregar(paciente)
+        print("✅ Paciente agregado correctamente.")
 
     def _buscar_paciente(self):
         try:
@@ -134,3 +130,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

@@ -17,13 +17,29 @@ class GestorInformes:
             1, "12-05-2024", 1, 1, 0, 2, 1, 0, 1, 1, 1, 6.5, 2, 0, 1, 2, 5, 1, 130, 85))
         self.informes.agregar(Informe(
             2, "13-05-2024", 0, 0, 1, 1, 0, 0, 0, 0, 0, 7.0, 1, 1, 2, 1, 3, 0, 120, 70))
+        self.informes.agregar(Informe(
+            3, "15-05-2024", 1, 0, 1, 0, 1, 1, 0, 0, 1, 8.0, 2, 0, 1, 2, 7, 1, 125, 80))
+        self.informes.agregar(Informe(
+            4, "20-05-2024", 0, 1, 0, 1, 0, 0, 1, 1, 0, 5.5, 0, 1, 2, 0, 4, 1, 140, 90))
+        self.informes.agregar(Informe(
+            5, "25-05-2024", 1, 1, 1, 2, 1, 1, 1, 0, 1, 7.2, 2, 1, 2, 2, 8, 1, 135, 88))
+        self.informes.agregar(Informe(
+            6, "28-05-2024", 0, 0, 0, 0, 0, 0, 0, 0, 0, 6.0, 1, 0, 0, 1, 2, 0, 118, 72))
+        self.informes.agregar(Informe(
+            7, "01-06-2024", 1, 1, 1, 1, 1, 1, 1, 1, 1, 8.5, 2, 1, 2, 2, 9, 1, 145, 95))
+        self.informes.agregar(Informe(
+            8, "05-06-2024", 0, 1, 0, 2, 0, 0, 1, 0, 1, 5.8, 0, 0, 1, 0, 3, 0, 122, 76))
+        self.informes.agregar(Informe(
+            9, "10-06-2024", 1, 0, 1, 0, 1, 1, 0, 1, 0, 7.7, 2, 1, 2, 1, 6, 1, 132, 84))
+        self.informes.agregar(Informe(
+            10, "15-06-2024", 0, 0, 0, 1, 0, 0, 0, 0, 1, 6.3, 1, 0, 0, 0, 4, 0, 125, 78))
 
     def mostrar_menu(self):
         print("\n📄 GESTOR DE INFORMES - DetectaMentIA")
         print("=" * 60)
         print("1. ➕ Agregar informe")
         print("2. 🔍 Buscar informe por ID")
-        print("3. 🗑️ Eliminar informe por ID")
+        print("3. 🗑️  Eliminar informe por ID")
         print("4. 📋 Mostrar todos los informes")
         print("5. 🚪 Salir")
         print("=" * 60)
@@ -54,7 +70,6 @@ class GestorInformes:
         """Agrega un informe solo si no existe otro con el mismo ID."""
         if self.informes.buscar(informe.id) is not None:
             raise Exception("Informe duplicado")
-        # Aquí podrías agregar más validaciones de datos si lo necesitas
         self.informes.agregar(informe)
         return True
 

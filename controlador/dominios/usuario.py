@@ -1,10 +1,9 @@
 class Usuario:
-    def __init__(self, id, nombre, apellido1, apellido2, passwd, rol, email, activo):
+    def __init__(self, id, nombre, apellido1, apellido2, rol, email, activo):
         self._id = id
         self._nombre = nombre
         self._apellido1 = apellido1
         self._apellido2 = apellido2
-        self._passwd = passwd
         self._rol = rol
         self._email = email
         self._activo = activo
@@ -40,14 +39,6 @@ class Usuario:
     @apellido2.setter
     def apellido2(self, apellido2):
         self._apellido2 = apellido2
-
-    @property
-    def passwd(self):
-        return self._passwd
-
-    @passwd.setter
-    def passwd(self, passwd):
-        self._passwd = passwd
 
     @property
     def rol(self):

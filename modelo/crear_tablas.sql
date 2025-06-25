@@ -28,7 +28,6 @@ CREATE TABLE Usuarios (
     nombre VARCHAR(100),
     apellido1 VARCHAR(100),
     apellido2 VARCHAR(100),
-    passwd VARCHAR(255),
     rol VARCHAR(50),
     email VARCHAR(100),
     activo BIT
@@ -59,8 +58,8 @@ CREATE TABLE Pacientes (
     FOREIGN KEY (id_informe) REFERENCES Informes(id_informe)
 );
 
--- Script de creación de tabla ResultadosJuegos
-CREATE TABLE ResultadosJuegos (
+-- Script de creación de tabla ResultadosJuegosJuegos
+CREATE TABLE ResultadosJuegosJuegos (
     id_resultado INT NOT NULL PRIMARY KEY,
     nombreJuego VARCHAR(100),
     fecha VARCHAR(10),

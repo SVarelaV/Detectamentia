@@ -1,19 +1,18 @@
--- Insertar un nuevo resultado en la base de datos
-INSERT INTO Resultados (id, idUsuario, idJuego, fecha, tiempoReaccion, aciertos, errores, intentos, tiempoTotal)
-VALUES (1, 1, 1, '2024-05-12', 1.5, 8, 1, 0, 20.0);
+-- Insertar un nuevo resultado de juego en la base de datos
+INSERT INTO ResultadosJuegos (id_resultado, nombreJuego, fecha, tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal)
+VALUES (99, 'Par', '10-06-2025', 1.5, 8, 1, 0, 20.0);
 
 -- Buscar un resultado por su ID
-SELECT * FROM Resultados WHERE id = 1;
+SELECT * FROM ResultadosJuegos WHERE id_resultado = 99;
 
 -- Eliminar un resultado por su ID
-DELETE FROM Resultados WHERE id = 1;
+DELETE FROM ResultadosJuegos WHERE id_resultado = 99;
 
--- Mostrar todos los resultados
-SELECT * FROM Resultados;
+-- Mostrar todos los resultados de juegos
+SELECT * FROM ResultadosJuegos;
 
 -- Verificar si un resultado existe por su ID
 SELECT CASE 
-        WHEN EXISTS (SELECT 1 FROM ResultadoJuego WHERE id = 1) THEN 1
+        WHEN EXISTS (SELECT 1 FROM ResultadosJuegos WHERE id_resultado = 99) THEN 1
         ELSE 0
     END AS Existe;
-

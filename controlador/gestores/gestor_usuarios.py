@@ -20,16 +20,16 @@ class GestorUsuarios:
 
     def _cargar_ejemplos(self):
         """Carga usuarios de ejemplo."""
-        self.usuarios.agregar(Usuario(1, "Laura", "Sánchez", "Gómez", "clave123", "profesional", "laura@example.com", True))
-        self.usuarios.agregar(Usuario(2, "Carlos", "Ruiz", "Díaz", "pass456", "paciente", "carlos@example.com", True))
-        self.usuarios.agregar(Usuario(3, "Marta", "López", "Fernández", "marta2025", "profesional", "marta.lopez@example.com", True))
-        self.usuarios.agregar(Usuario(4, "Pedro", "Martínez", "Santos", "pedro321", "paciente", "pedro.martinez@example.com", False))
-        self.usuarios.agregar(Usuario(5, "Ana", "García", "Moreno", "ana456", "profesional", "ana.garcia@example.com", True))
-        self.usuarios.agregar(Usuario(6, "Luis", "Torres", "Navarro", "luispass", "paciente", "luis.torres@example.com", True))
-        self.usuarios.agregar(Usuario(7, "Elena", "Jiménez", "Romero", "elena789", "profesional", "elena.jimenez@example.com", False))
-        self.usuarios.agregar(Usuario(8, "Javier", "Hernández", "Molina", "javierpass", "paciente", "javier.hernandez@example.com", True))
-        self.usuarios.agregar(Usuario(9, "Sofía", "Castro", "Ortega", "sofia123", "profesional", "sofia.castro@example.com", True))
-        self.usuarios.agregar(Usuario(10, "Miguel", "Serrano", "Vega", "miguelpass", "paciente", "miguel.serrano@example.com", False))
+        self.usuarios.agregar(Usuario(1, "Laura", "Sánchez", "Gómez", "profesional", "laura@example.com", True))
+        self.usuarios.agregar(Usuario(2, "Carlos", "Ruiz", "Díaz", "paciente", "carlos@example.com", True))
+        self.usuarios.agregar(Usuario(3, "Marta", "López", "Fernández", "profesional", "marta.lopez@example.com", True))
+        self.usuarios.agregar(Usuario(4, "Pedro", "Martínez", "Santos", "paciente", "pedro.martinez@example.com", False))
+        self.usuarios.agregar(Usuario(5, "Ana", "García", "Moreno", "profesional", "ana.garcia@example.com", True))
+        self.usuarios.agregar(Usuario(6, "Luis", "Torres", "Navarro", "paciente", "luis.torres@example.com", True))
+        self.usuarios.agregar(Usuario(7, "Elena", "Jiménez", "Romero", "profesional", "elena.jimenez@example.com", False))
+        self.usuarios.agregar(Usuario(8, "Javier", "Hernández", "Molina", "paciente", "javier.hernandez@example.com", True))
+        self.usuarios.agregar(Usuario(9, "Sofía", "Castro", "Ortega", "profesional", "sofia.castro@example.com", True))
+        self.usuarios.agregar(Usuario(10, "Miguel", "Serrano", "Vega", "paciente", "miguel.serrano@example.com", False))
 
     def mostrar_menu(self):
         print("\n👥 GESTOR DE USUARIOS")
@@ -77,12 +77,11 @@ class GestorUsuarios:
             nombre = input("Nombre: ")
             apellido1 = input("Primer apellido: ")
             apellido2 = input("Segundo apellido: ")
-            passwd = input("Contraseña: ")
             rol = input("Rol (paciente/profesional): ")
             email = input("Email: ")
             activo = input("¿Activo? (s/n): ").lower() == "s"
 
-            nuevo = Usuario(id, nombre, apellido1, apellido2, passwd, rol, email, activo)
+            nuevo = Usuario(id, nombre, apellido1, apellido2, rol, email, activo)
             if self.usuarios.agregar(nuevo):
                 print("✅ Usuario agregado.")
             else:

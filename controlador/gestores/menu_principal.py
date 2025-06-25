@@ -14,7 +14,7 @@ class MenuPrincipal:
         print("=" * 60)
         print("1. 👤 Gestión de Pacientes")
         print("2. 📄 Gestión de Informes")
-        print("3. 🎮 Gestión de Resultados de Juegos")
+        print("3. 🎮 Gestión de ResultadosJuegos de Juegos")
         print("4. 👥 Gestión de Usuarios")
         print("5. 🚪 Salir")
         print("=" * 60)

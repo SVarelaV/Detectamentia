@@ -59,7 +59,7 @@ CREATE TABLE Pacientes (
 );
 
 -- Script de creación de tabla ResultadosJuegosJuegos
-CREATE TABLE ResultadosJuegosJuegos (
+CREATE TABLE ResultadoJuegos (
     id_resultado INT NOT NULL PRIMARY KEY,
     nombreJuego VARCHAR(100),
     fecha VARCHAR(10),

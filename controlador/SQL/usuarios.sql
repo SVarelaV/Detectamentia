@@ -1,6 +1,6 @@
 -- Insertar un nuevo usuario en la base de datos
-INSERT INTO Usuarios (id_usuario, nombre, apellido1, apellido2, rol, email, activo)
-VALUES (99, 'Carlos', 'García', 'López', 'paciente', 'carlos.garcia@example.com', 1);
+-INSERT INTO Usuarios (id_usuario, nombre, apellido1, apellido2, rol, email, activo)
+-VALUES (99, 'Carlos', 'García', 'López', 'paciente', 'carlos.garcia@example.com', 1);
 
 -- Buscar un usuario por su ID
 SELECT * FROM Usuarios WHERE id_usuario = 99;

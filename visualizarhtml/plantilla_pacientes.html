@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>DetectaMentIA - Lista de Pacientes</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 1000px;
+            margin: auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .table-productos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .table-productos th {
+            background-color: #007bff;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        .table-productos td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .info {
+            margin-top: 20px;
+            text-align: center;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👥 Lista de Pacientes</h1>
+        {{TABLA_PACIENTES}}
+
+        <div class="info">
+            <p>Total de pacientes registrados: <strong>{{TOTAL_PACIENTES}}</strong></p>
+            <p>Última actualización: {{FECHA_ACTUALIZACION}}</p>
+        </div>
+    </div>
+</body>
+</html>

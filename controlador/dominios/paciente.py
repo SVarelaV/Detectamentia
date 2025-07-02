@@ -1,6 +1,6 @@
 class Paciente:
-    def __init__(self, id, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios):
-        self._id_paciente = id
+    def __init__(self, id_paciente, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios):
+        self._id_paciente = id_paciente
         self._nombre = nombre
         self._apellido1 = apellido1
         self._apellido2 = apellido2
@@ -11,12 +11,12 @@ class Paciente:
         self._nivelEstudios = nivelEstudios
 
     @property
-    def id(self):
-        return self._id
+    def id_paciente(self):
+        return self._id_paciente
 
-    @id.setter
-    def id(self, id):
-        self._id = id
+    @id_paciente.setter
+    def id_paciente(self, id_paciente):
+        self._id_paciente = id_paciente
 
     @property
     def nombre(self):

@@ -2,7 +2,6 @@ from controlador.dominios.paciente import Paciente
 from controlador.gestores.pacientes import Pacientes
 
 
-
 class GestorPacientes:
     """Gestor que maneja las operaciones sobre pacientes."""
 
@@ -12,12 +11,7 @@ class GestorPacientes:
             self._cargar_ejemplos()
 
     def agregar(self, paciente):
-        """
-        Agrega un nuevo paciente a la lista solo si no existe otro con el mismo ID.
-        Lanza una excepción si el paciente ya existe.
-        """
-        # Solo validación de duplicados
-        if any(p.id_paciente == paciente._id for p in self.lista_pacientes._elementos):
+        if self.lista_pacientes.buscar(paciente.id_paciente):
             raise Exception("Paciente duplicado")
         self.lista_pacientes.agregar(paciente)
         return True
@@ -36,7 +30,6 @@ class GestorPacientes:
         self.lista_pacientes.agregar(Paciente(10, "María", "Castro", "Ortega", "Femenino", 67, "Córdoba", "Ama de casa", "Primaria completa"))
 
     def mostrar_menu(self):
-        """Muestra el menú de opciones."""
         print("\n" + "="*50)
         print("🧠 GESTOR DE PACIENTES - DetectaMentIA")
         print("="*50)
@@ -48,12 +41,10 @@ class GestorPacientes:
         print("="*50)
 
     def mostrar_paciente(self, paciente: Paciente):
-        """Imprime los datos de un paciente."""
-        print(f"👤 ID: {paciente.id_paciente} | {paciente.nombre} {paciente.apellido1} {paciente.apellido2} | {paciente.edad} años | "
-            f" {paciente.poblacion} | {paciente.ocupacion} | {paciente.nivelEstudios}")
+        print(f"👤 ID: {paciente.id_paciente} | {paciente.nombre} {paciente.apellido1} {paciente.apellido2} | "
+            f"{paciente.edad} años | {paciente.poblacion} | {paciente.ocupacion} | {paciente.nivelEstudios}")
 
     def ejecutar(self):
-        """Ejecuta el ciclo principal de interacción."""
         while True:
             self.mostrar_menu()
             opcion = input("Selecciona una opción: ").strip()
@@ -73,25 +64,28 @@ class GestorPacientes:
                 print("❌ Opción inválida. Intenta de nuevo.")
 
     def _agregar_paciente(self):
-        print("\n➕ Agregar nuevo paciente")
-        id = int(input("ID: "))
-        nombre = input("Nombre: ")
-        apellido1 = input("Primer apellido: ")
-        apellido2 = input("Segundo apellido: ")
-        genero = input("Género: ")
-        edad = int(input("Edad: "))
-        poblacion = input("Población: ")
-        ocupacion = input("Ocupación: ")
-        nivelEstudios = input("Nivel de estudios: ")
+        try:
+            print("\n➕ Agregar nuevo paciente")
+            id_paciente = int(input("ID: "))
+            nombre = input("Nombre: ")
+            apellido1 = input("Primer apellido: ")
+            apellido2 = input("Segundo apellido: ")
+            genero = input("Género: ")
+            edad = int(input("Edad: "))
+            poblacion = input("Población: ")
+            ocupacion = input("Ocupación: ")
+            nivelEstudios = input("Nivel de estudios: ")
 
-        paciente = Paciente(id, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
-        self.agregar(paciente)
-        print("✅ Paciente agregado correctamente.")
+            paciente = Paciente(id_paciente, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
+            self.agregar(paciente)
+            print("✅ Paciente agregado correctamente.")
+        except Exception as e:
+            print(f"❌ Error: {e}")
 
     def _buscar_paciente(self):
         try:
-            id = int(input("\n🔍 ID del paciente a buscar: "))
-            paciente = self.lista_pacientes.buscar(id)
+            id_paciente = int(input("\n🔍 ID del paciente a buscar: "))
+            paciente = self.lista_pacientes.buscar(id_paciente)
             if paciente:
                 print("\n👁️ Paciente encontrado:")
                 self.mostrar_paciente(paciente)
@@ -102,8 +96,8 @@ class GestorPacientes:
 
     def _eliminar_paciente(self):
         try:
-            id = int(input("\n🗑️ ID del paciente a eliminar: "))
-            if self.lista_pacientes.eliminar(id):
+            id_paciente = int(input("\n🗑️ ID del paciente a eliminar: "))
+            if self.lista_pacientes.eliminar(id_paciente):
                 print("✅ Paciente eliminado correctamente.")
             else:
                 print("❌ No se encontró un paciente con ese ID.")
@@ -130,4 +124,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

@@ -1,6 +1,6 @@
 class ResultadoJuego:
-    def __init__(self, id, nombreJuego, fecha, tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal):
-        self._id = id
+    def __init__(self, id_resultado, nombreJuego, fecha, tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal):
+        self._id_resultado = id_resultado
         self._nombreJuego = nombreJuego
         self._fecha = fecha
         self._tiempoReaccion = tiempoReaccion
@@ -10,12 +10,12 @@ class ResultadoJuego:
         self._tiempoTotal = tiempoTotal
 
     @property
-    def id(self):
-        return self._id
+    def id_resultado(self):
+        return self._id_resultado
 
-    @id.setter
-    def id_resultado(self, id):
-        self._id = id
+    @id_resultado.setter
+    def id_resultado(self, id_resultado):
+        self._id_resultado = id_resultado
 
     @property
     def nombreJuego(self):

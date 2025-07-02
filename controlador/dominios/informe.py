@@ -1,9 +1,9 @@
 class Informe:
-    def __init__(self, id, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
+    def __init__(self, id_informe, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
                 hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular, trastornoSueno,
                 horaSueno, calidadSueno, fumador, consumoAlcohol, actividadFisica, nivelEstres,
                 dietaSaludable, presionArterialSis, presionArterialDia):
-        self._id = id
+        self._id_informe = id_informe
         self._fechaRegistro = fechaRegistro
         self._antecFamiliaresAlzheimer = antecFamiliaresAlzheimer
         self._diabetes = diabetes
@@ -25,12 +25,12 @@ class Informe:
         self._presionArterialDia = presionArterialDia
 
     @property
-    def id(self):
-        return self._id
+    def id_informe(self):
+        return self._id_informe
 
-    @id.setter
-    def id(self, id):
-        self._id = id
+    @id_informe.setter
+    def id_informe(self, id_informe):
+        self._id_informe = id_informe
 
     @property
     def fechaRegistro(self):

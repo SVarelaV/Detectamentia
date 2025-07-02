@@ -67,13 +67,11 @@ class GestorInformes:
                 print("❌ Opción no válida. Intenta de nuevo.")
 
     def agregar_informe(self, informe):
-        """Agrega un informe solo si no existe otro con el mismo ID."""
         if self.informes.buscar(informe.id_informe) is not None:
             raise Exception("Informe duplicado")
         self.informes.agregar(informe)
         return True
 
-    
     def _agregar_informe(self):
         try:
             print("➕ Agregar nuevo informe")
@@ -110,11 +108,10 @@ class GestorInformes:
         except Exception as e:
             print(f"❌ Error al agregar informe: {e}")
 
-
     def _buscar_informe(self):
         try:
-            id = int(input("🔍 ID del informe: "))
-            informe = self.informes.buscar(id)
+            id_informe = int(input("🔍 ID del informe: "))
+            informe = self.informes.buscar(id_informe)
             if informe:
                 self.mostrar_informe(informe)
             else:
@@ -124,8 +121,8 @@ class GestorInformes:
 
     def _eliminar_informe(self):
         try:
-            id = int(input("🗑️ ID del informe a eliminar: "))
-            if self.informes.eliminar(id):
+            id_informe = int(input("🗑️ ID del informe a eliminar: "))
+            if self.informes.eliminar(id_informe):
                 print("✅ Informe eliminado.")
             else:
                 print("❌ No se encontró un informe con ese ID.")

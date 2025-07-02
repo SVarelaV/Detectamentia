@@ -1,6 +1,6 @@
 class Usuario:
-    def __init__(self, id, nombre, apellido1, apellido2, rol, email, activo):
-        self._id = id
+    def __init__(self, id_usuario, nombre, apellido1, apellido2, rol, email, activo):
+        self._id_usuario = id_usuario
         self._nombre = nombre
         self._apellido1 = apellido1
         self._apellido2 = apellido2
@@ -9,12 +9,12 @@ class Usuario:
         self._activo = activo
 
     @property
-    def id(self):
-        return self._id
+    def id_usuario(self):
+        return self._id_usuario
 
-    @id.setter
-    def id(self, id):
-        self._id_usuario = id
+    @id_usuario.setter
+    def id_usuario(self, id_usuario):
+        self._id_usuario = id_usuario
 
     @property
     def nombre(self):

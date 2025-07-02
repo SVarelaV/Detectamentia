@@ -14,7 +14,7 @@ class Usuario:
 
     @id.setter
     def id(self, id):
-        self._id = id
+        self._id_usuario = id
 
     @property
     def nombre(self):

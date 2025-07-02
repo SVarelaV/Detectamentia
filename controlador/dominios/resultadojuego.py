@@ -14,7 +14,7 @@ class ResultadoJuego:
         return self._id
 
     @id.setter
-    def id(self, id):
+    def id_resultado(self, id):
         self._id = id
 
     @property

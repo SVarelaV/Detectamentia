@@ -2,7 +2,7 @@ from controlador.sql_gestores.crud_informes import *
 
 # Test manual para verificar el CRUD de informes
 def test_crud_informes():
-    id_test = 999  # Debe ser int, no string
+    id_test = 888
     print("\n🔹 Agregando informe de prueba...")
     agregado = agregar_informe(
         id_informe=id_test,
@@ -72,3 +72,4 @@ def test_crud_informes():
 
 if __name__ == '__main__':
     test_crud_informes()
+

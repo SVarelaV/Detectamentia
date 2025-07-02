@@ -1,7 +1,7 @@
 -- Script de creación de tabla Informes
 CREATE TABLE Informes (
     id_informe INT NOT NULL PRIMARY KEY,
-    fechaRegistro VARCHAR(9),
+    fechaRegistro VARCHAR(10),
     antecFamiliaresAlzheimer BIT,
     diabetes BIT,
     colesterol BIT,

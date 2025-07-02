@@ -101,6 +101,34 @@ class GestorInformes:
                             cardiopatia, depresion, acv, trastorno_sueno, horas_sueno,
                             calidad_sueno, fumador, alcohol, actividad, estres,
                             dieta, presion_sis, presion_dia)
+            id = int(input("ID del informe: "))
+            fechaRegistro = input("Fecha de registro (DD-MM-YYYY): ")
+            antecFamiliaresAlzheimer = int(input("Antecedentes familiares Alzheimer (1: Sí, 0: No): "))
+            diabetes = int(input("Diabetes (1: Sí, 0: No): "))
+            colesterol = int(input("Colesterol (1: Sí, 0: No): "))
+            migrainas = int(input("Migrañas (0: Nunca, 1: Ocasional, 2: Frecuente): "))
+            hipertension = int(input("Hipertensión (1: Sí, 0: No): "))
+            cardiopatia = int(input("Cardiopatía (1: Sí, 0: No): "))
+            depresionDiag = int(input("Depresión diagnosticada (1: Sí, 0: No): "))
+            accidenteCerebrovascular = int(input("ACV (0 si no, o número de episodios): "))
+            trastornoSueno = int(input("Trastorno del sueño (1: Sí, 0: No): "))
+            horaSueno = float(input("Horas de sueño: "))
+            calidadSueno = int(input("Calidad del sueño (0: Mala, 1: Regular, 2: Buena): "))
+            fumador = int(input("Fumador (1: Sí, 0: No): "))
+            consumoAlcohol = int(input("Consumo de alcohol (0: Nunca, 1: Ocasional, 2: Frecuente): "))
+            actividadFisica = int(input("Actividad física (0: Sedentario, 1: Moderado, 2: Activo): "))
+            nivelEstres = int(input("Nivel de estrés (1-10): "))
+            dietaSaludable = int(input("Dieta saludable (1: Sí, 0: No): "))
+            presionArterialSis = int(input("Presión sistólica: "))
+            presionArterialDia = int(input("Presión diastólica: "))
+
+            nuevo = Informe(
+                id, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
+                hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular, trastornoSueno,
+                horaSueno, calidadSueno, fumador, consumoAlcohol, actividadFisica,
+                nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia
+            )
+
 
             self.agregar_informe(nuevo)
             print("✅ Informe agregado correctamente.")

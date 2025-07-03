@@ -10,7 +10,6 @@ class ListaGen(ABC, Generic[T]):
 
     def __init__(self):
         self._elementos: List[T] = []
-        self._atributos_id = ['id_paciente', 'id_usuario', 'id_informe', 'id_resultado']
 
     @abstractmethod
     def agregar(self, elemento: T) -> bool:

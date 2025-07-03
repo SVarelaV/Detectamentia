@@ -1,18 +1,18 @@
 from modelo.config import get_connection
 
-def agregar_resultado_juego(id_resultado, id_paciente, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos):
+def agregar_resultado_juego(id_resultado, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos):
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(
             '''
             INSERT INTO ResultadoJuegos (
-                id_resultado, id_paciente, nombreJuego, fecha, tiempoReaccion,
+                id_resultado, nombreJuego, fecha, tiempoReaccion,
                 aciertos, errores, tiempoTotal, numeroIntentos
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ''',
-            (id_resultado, id_paciente, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos)
+            (id_resultado, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos)
         )
         conn.commit()
         return True
@@ -71,18 +71,18 @@ def existe_resultado(id_resultado):
     finally:
         conn.close()
 
-def actualizar_resultado_juego(id_resultado, id_paciente, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos):
+def actualizar_resultado_juego(id_resultado, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos):
     try:
         conn = get_connection()
         cursor = conn.cursor()
         cursor.execute(
             '''
             UPDATE ResultadoJuegos
-            SET id_paciente = ?, nombreJuego = ?, fecha = ?, tiempoReaccion = ?, 
+            SET nombreJuego = ?, fecha = ?, tiempoReaccion = ?, 
                 aciertos = ?, errores = ?, tiempoTotal = ?, numeroIntentos = ?
             WHERE id_resultado = ?
             ''',
-            (id_paciente, nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos, id_resultado)
+            (nombreJuego, fecha, tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos, id_resultado)
         )
         conn.commit()
         return cursor.rowcount > 0

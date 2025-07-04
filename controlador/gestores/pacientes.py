@@ -14,21 +14,24 @@ class Pacientes(ListaGen[Paciente]):
         self._elementos = self.mostrar_todos()
 
     def agregar(self, paciente: Paciente) -> bool:
-        if self.existe(paciente):
-            return False
         try:
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO Pacientes (
-                    id_paciente, nombre, apellido1, apellido2, genero, edad,
+                    nombre, apellido1, apellido2, genero, edad,
                     poblacion, ocupacion, nivelEstudios
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
-                paciente.id_paciente, paciente.nombre, paciente.apellido1, paciente.apellido2,
+                paciente.nombre, paciente.apellido1, paciente.apellido2,
                 paciente.genero, paciente.edad, paciente.poblacion,
                 paciente.ocupacion, paciente.nivelEstudios
             ))
+
+            # Recuperar el ID generado automáticamente
+            cursor.execute("SELECT SCOPE_IDENTITY()")
+            paciente.id_paciente = cursor.fetchone()[0]
+
             conn.commit()
             self._elementos.append(paciente)
             return True
@@ -37,6 +40,7 @@ class Pacientes(ListaGen[Paciente]):
             return False
         finally:
             conn.close()
+
 
     def eliminar(self, id_elemento: int) -> bool:
         try:

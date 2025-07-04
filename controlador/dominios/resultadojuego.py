@@ -1,5 +1,5 @@
 class ResultadoJuego:
-    def __init__(self, id_resultado, nombreJuego, fecha, tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal):
+    def __init__(self, nombreJuego, fecha, tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal, id_resultado=None):
         self._id_resultado = id_resultado
         self._nombreJuego = nombreJuego
         self._fecha = fecha

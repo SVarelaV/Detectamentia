@@ -14,26 +14,28 @@ class Informes(ListaGen[Informe]):
         self._elementos = self.mostrar_todos()
 
     def agregar(self, informe: Informe) -> bool:
-        if self.existe(informe):
-            return False
         try:
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO Informes (
-                    id_informe, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol,
+                    fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol,
                     migrainas, hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular,
                     trastornoSueno, horaSueno, calidadSueno, fumador, consumoAlcohol,
                     actividadFisica, nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
-                informe.id_informe, informe.fechaRegistro, informe.antecFamiliaresAlzheimer, informe.diabetes,
+                informe.fechaRegistro, informe.antecFamiliaresAlzheimer, informe.diabetes,
                 informe.colesterol, informe.migrainas, informe.hipertension, informe.cardiopatia,
                 informe.depresionDiag, informe.accidenteCerebrovascular, informe.trastornoSueno,
                 informe.horaSueno, informe.calidadSueno, informe.fumador, informe.consumoAlcohol,
                 informe.actividadFisica, informe.nivelEstres, informe.dietaSaludable,
                 informe.presionArterialSis, informe.presionArterialDia
             ))
+            # Obtener el ID generado por SQL Server
+            cursor.execute("SELECT SCOPE_IDENTITY()")
+            informe.id_informe = cursor.fetchone()[0]
+
             conn.commit()
             self._elementos.append(informe)
             return True

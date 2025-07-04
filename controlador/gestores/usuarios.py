@@ -13,6 +13,7 @@ class Usuarios(ListaGen[Usuario]):
         super().__init__()
         self._elementos = self.mostrar_todos()
 
+
     def agregar(self, usuario: Usuario) -> bool:
         if self.existe(usuario):
             return False
@@ -20,12 +21,17 @@ class Usuarios(ListaGen[Usuario]):
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO Usuarios (id_usuario, nombre, apellido1, apellido2, rol, email, activo) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO Usuarios (nombre, apellido1, apellido2, rol, email, activo) VALUES (?, ?, ?, ?, ?, ?)",
                 (
-                    usuario.id_usuario, usuario.nombre, usuario.apellido1,
+                    usuario.nombre, usuario.apellido1,
                     usuario.apellido2, usuario.rol, usuario.email, usuario.activo
                 )
             )
+
+            # Obtener el ID generado automáticamente por SQL Server
+            cursor.execute("SELECT SCOPE_IDENTITY()")
+            usuario.id_usuario = cursor.fetchone()[0]
+
             conn.commit()
             self._elementos.append(usuario)
             return True
@@ -34,6 +40,7 @@ class Usuarios(ListaGen[Usuario]):
             return False
         finally:
             conn.close()
+
 
     def eliminar(self, id_elemento: int) -> bool:
         try:
@@ -51,6 +58,7 @@ class Usuarios(ListaGen[Usuario]):
         finally:
             conn.close()
 
+
     def buscar(self, id_elemento: int) -> Optional[Usuario]:
         try:
             conn = get_connection()
@@ -66,6 +74,7 @@ class Usuarios(ListaGen[Usuario]):
         finally:
             conn.close()
 
+
     def mostrar_todos(self) -> List[Usuario]:
         try:
             conn = get_connection()
@@ -79,6 +88,7 @@ class Usuarios(ListaGen[Usuario]):
         finally:
             conn.close()
 
+
     def existe(self, usuario: Usuario) -> bool:
         try:
             conn = get_connection()
@@ -90,6 +100,7 @@ class Usuarios(ListaGen[Usuario]):
             return False
         finally:
             conn.close()
+
 
     def actualizar(self, usuario: Usuario) -> bool:
         try:
@@ -111,6 +122,7 @@ class Usuarios(ListaGen[Usuario]):
         finally:
             conn.close()
 
+
     def buscar_por_email(self, email: str) -> Optional[Usuario]:
         try:
             conn = get_connection()
@@ -125,6 +137,7 @@ class Usuarios(ListaGen[Usuario]):
             return None
         finally:
             conn.close()
+
 
     def buscar_por_rol(self, rol: str) -> List[Usuario]:
         try:

@@ -1,8 +1,8 @@
 class Informe:
-    def __init__(self, id_informe, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
+    def __init__(self, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
                 hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular, trastornoSueno,
                 horaSueno, calidadSueno, fumador, consumoAlcohol, actividadFisica, nivelEstres,
-                dietaSaludable, presionArterialSis, presionArterialDia):
+                dietaSaludable, presionArterialSis, presionArterialDia, id_informe=None):
         self._id_informe = id_informe
         self._fechaRegistro = fechaRegistro
         self._antecFamiliaresAlzheimer = antecFamiliaresAlzheimer

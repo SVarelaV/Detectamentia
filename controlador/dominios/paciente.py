@@ -1,5 +1,5 @@
 class Paciente:
-    def __init__(self, id_paciente, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios):
+    def __init__(self, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios, id_paciente=None):
         self._id_paciente = id_paciente
         self._nombre = nombre
         self._apellido1 = apellido1

@@ -11,25 +11,29 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
         super().__init__()
         self._elementos = self.mostrar_todos()
 
+
     def agregar(self, resultado: ResultadoJuego) -> bool:
-        if self.existe(resultado):
-            return False
         try:
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute(
                 """
                 INSERT INTO ResultadoJuegos (
-                    id_resultado, nombreJuego, fecha,
+                    nombreJuego, fecha,
                     tiempoReaccion, aciertos, errores, tiempoTotal, numeroIntentos
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
-                    resultado.id_resultado, resultado.nombreJuego, resultado.fecha,
+                    resultado.nombreJuego, resultado.fecha,
                     resultado.tiempoReaccion, resultado.aciertos, resultado.errores,
                     resultado.tiempoTotal, resultado.numeroIntentos
                 )
             )
+
+            # Obtener el ID generado automáticamente por SQL Server
+            cursor.execute("SELECT SCOPE_IDENTITY()")
+            resultado.id_resultado = cursor.fetchone()[0]
+
             conn.commit()
             self._elementos.append(resultado)
             return True
@@ -38,6 +42,7 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
             return False
         finally:
             conn.close()
+
 
     def eliminar(self, id_elemento: int) -> bool:
         try:
@@ -54,6 +59,7 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
             return False
         finally:
             conn.close()
+
 
     def buscar(self, id_elemento: int) -> Optional[ResultadoJuego]:
         try:
@@ -77,6 +83,7 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
         finally:
             conn.close()
 
+
     def mostrar_todos(self) -> List[ResultadoJuego]:
         try:
             conn = get_connection()
@@ -96,6 +103,7 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
         finally:
             conn.close()
 
+
     def existe(self, resultado: ResultadoJuego) -> bool:
         try:
             conn = get_connection()
@@ -107,6 +115,7 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
             return False
         finally:
             conn.close()
+
 
     def actualizar(self, resultado: ResultadoJuego) -> bool:
         try:

@@ -63,7 +63,7 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM Usuarios WHERE id_usuario = ?", (id_elemento,))
+            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario WHERE id_usuario = ?", (id_elemento,))
             fila = cursor.fetchone()
             if fila:
                 return Usuario(*fila)
@@ -79,7 +79,7 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM Usuarios")
+            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario")
             filas = cursor.fetchall()
             return [Usuario(*fila) for fila in filas]
         except Exception as e:
@@ -127,7 +127,7 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM Usuarios WHERE email = ?", (email,))
+            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario WHERE email = ?", (email,))
             fila = cursor.fetchone()
             if fila:
                 return Usuario(*fila)
@@ -143,7 +143,7 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM Usuarios WHERE rol = ?", (rol,))
+            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario WHERE rol = ?", (rol,))
             filas = cursor.fetchall()
             return [Usuario(*fila) for fila in filas]
         except Exception as e:

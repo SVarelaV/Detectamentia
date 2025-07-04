@@ -67,8 +67,8 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
             cursor = conn.cursor()
             cursor.execute(
                 """
-                SELECT id_resultado, nombreJuego, fecha,
-                    tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal
+                SELECT nombreJuego, fecha,
+                    tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal, id_resultado
                     FROM ResultadoJuegos
                 WHERE id_resultado = ?
                 """, (id_elemento,)
@@ -90,8 +90,8 @@ class ResultadoJuegos(ListaGen[ResultadoJuego]):
             cursor = conn.cursor()
             cursor.execute(
                 """
-                SELECT id_resultado, nombreJuego, fecha,
-                    tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal
+                SELECT nombreJuego, fecha,
+                    tiempoReaccion, aciertos, errores, numeroIntentos, tiempoTotal, id_resultado
                 FROM ResultadoJuegos
                 """
             )

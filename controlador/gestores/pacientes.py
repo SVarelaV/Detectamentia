@@ -84,7 +84,7 @@ class Pacientes(ListaGen[Paciente]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT id_paciente, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios FROM Pacientes")
+            cursor.execute("SELECT nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios, id_paciente FROM Pacientes")
             # cursor.execute("SELECT * FROM Pacientes")
             filas = cursor.fetchall()
             return [Paciente(*fila) for fila in filas]

@@ -25,9 +25,12 @@ class GestorPacientes:
         print("5. 🚪 Salir")
         print("="*50)
 
+    
+    
     def mostrar_paciente(self, paciente: Paciente):
-        print(f"👤 ID: {paciente.id_paciente} | {paciente.nombre} {paciente.apellido1} {paciente.apellido2} | "
-            f"{paciente.edad} años | {paciente.poblacion} | {paciente.ocupacion} | {paciente.nivelEstudios}")
+        print(f"{paciente.id_paciente}. {paciente.nombre} {paciente.apellido1} {paciente.apellido2} "
+            f"({paciente.edad} años) - Género: {paciente.genero} | "
+            f"Población: {paciente.poblacion} | Ocupación: {paciente.ocupacion} | Estudios: {paciente.nivelEstudios}")
 
     def ejecutar(self):
         while True:

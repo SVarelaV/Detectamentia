@@ -58,7 +58,6 @@ class GestorUsuarios:
     def _agregar_usuario(self):
         try:
             print("\n➕ Nuevo usuario")
-            id = int(input("ID: "))
             nombre = input("Nombre: ")
             apellido1 = input("Primer apellido: ")
             apellido2 = input("Segundo apellido: ")
@@ -66,11 +65,9 @@ class GestorUsuarios:
             email = input("Email: ")
             activo = input("¿Activo? (s/n): ").lower() == "s"
 
-            nuevo = Usuario(id, nombre, apellido1, apellido2, rol, email, activo)
-            if self.usuarios.agregar(nuevo):
-                print("✅ Usuario agregado.")
-            else:
-                print("⚠️ Ya existe un usuario con ese ID.")
+            nuevo = Usuario(nombre, apellido1, apellido2, rol, email, activo)
+            self.usuarios.agregar(nuevo)
+            print(f"✅ Usuario agregado con ID: {nuevo.id_usuario}")
         except Exception as e:
             print(f"❌ Error al agregar: {e}")
 

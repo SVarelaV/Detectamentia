@@ -50,7 +50,6 @@ class GestorInformes:
     def _agregar_informe(self):
         try:
             print("➕ Agregar nuevo informe")
-            id_informe = int(input("ID del informe: "))
             fechaRegistro = input("Fecha de registro (DD-MM-YYYY): ")
             antecFamiliaresAlzheimer = int(input("Antecedentes familiares Alzheimer (1: Sí, 0: No): "))
             diabetes = int(input("Diabetes (1: Sí, 0: No): "))
@@ -72,14 +71,15 @@ class GestorInformes:
             presionArterialDia = int(input("Presión diastólica: "))
 
             nuevo = Informe(
-                id_informe, fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
+                fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,
                 hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular, trastornoSueno,
                 horaSueno, calidadSueno, fumador, consumoAlcohol, actividadFisica,
                 nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia
             )
 
-            self.agregar_informe(nuevo)
-            print("✅ Informe agregado correctamente.")
+            self.informes.agregar(nuevo)
+            print(f"✅ Informe agregado con ID: {nuevo.id_informe}")
+
         except Exception as e:
             print(f"❌ Error al agregar informe: {e}")
 

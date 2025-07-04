@@ -52,7 +52,6 @@ class GestorResultadoJuegos:
     def _agregar_resultado(self):
         try:
             print("\n➕ Nuevo resultado de juego")
-            id = int(input("ID: "))
             juego = input("Nombre del juego: ")
             fecha = input("Fecha (DD-MM-YYYY): ")
             reaccion = float(input("Tiempo de reacción (s): "))
@@ -61,11 +60,12 @@ class GestorResultadoJuegos:
             intentos = int(input("Número de intentos (si aplica): "))
             total = float(input("Tiempo total (s): "))
 
-            nuevo = ResultadoJuego(id, juego, fecha, reaccion, aciertos, errores, intentos, total)
-            self.agregar_resultado(nuevo)
-            print("✅ Resultado agregado.")
+            nuevo = ResultadoJuego(juego, fecha, reaccion, aciertos, errores, intentos, total)
+            self.resultados.agregar(nuevo)
+            print(f"✅ Resultado agregado con ID: {nuevo.id_resultado}")
         except Exception as e:
             print(f"❌ Error al agregar: {e}")
+
 
     def _buscar_resultado(self):
         try:

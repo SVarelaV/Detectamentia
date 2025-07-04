@@ -51,7 +51,6 @@ class GestorPacientes:
     def _agregar_paciente(self):
         try:
             print("\n➕ Agregar nuevo paciente")
-            id_paciente = int(input("ID: "))
             nombre = input("Nombre: ")
             apellido1 = input("Primer apellido: ")
             apellido2 = input("Segundo apellido: ")
@@ -61,9 +60,8 @@ class GestorPacientes:
             ocupacion = input("Ocupación: ")
             nivelEstudios = input("Nivel de estudios: ")
 
-            paciente = Paciente(id_paciente, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
-            self.agregar(paciente)
-            print("✅ Paciente agregado correctamente.")
+            paciente = Paciente(nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
+            print(f"✅ Paciente agregado con ID: {paciente.id_paciente}")
         except Exception as e:
             print(f"❌ Error: {e}")
 

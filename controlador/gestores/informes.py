@@ -65,11 +65,15 @@ class Informes(ListaGen[Informe]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol,
-        migrainas, hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular,
-        trastornoSueno, horaSueno, calidadSueno, fumador, consumoAlcohol,
-        actividadFisica, nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia, id_informe
-     FROM Informes WHERE id_informe = ?", (id_elemento,))
+            cursor.execute('''
+                SELECT fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol,
+                    migrainas, hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular,
+                    trastornoSueno, horaSueno, calidadSueno, fumador, consumoAlcohol,
+                    actividadFisica, nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia, id_informe
+                FROM Informes
+                WHERE id_informe = ?
+            ''', (id_elemento,))
+
             fila = cursor.fetchone()
             if fila:
                 return Informe(*fila)
@@ -84,11 +88,14 @@ class Informes(ListaGen[Informe]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol,
-        migrainas, hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular,
-        trastornoSueno, horaSueno, calidadSueno, fumador, consumoAlcohol,
-        actividadFisica, nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia, id_informe
-     FROM Informes")
+            cursor.execute('''
+            SELECT fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol,
+                migrainas, hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular,
+                trastornoSueno, horaSueno, calidadSueno, fumador, consumoAlcohol,
+                actividadFisica, nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia, id_informe
+            FROM Informes
+        ''')
+
             filas = cursor.fetchall()
             return [Informe(*fila) for fila in filas]
         except Exception as e:

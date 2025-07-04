@@ -62,7 +62,6 @@ class Pacientes(ListaGen[Paciente]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            # cursor.execute("SELECT * FROM Pacientes WHERE id_paciente = ?", (id_elemento,))
             cursor.execute("""
             SELECT id_paciente, nombre, apellido1, apellido2, genero, edad,
                 poblacion, ocupacion, nivelEstudios
@@ -80,14 +79,27 @@ class Pacientes(ListaGen[Paciente]):
         finally:
             conn.close()
 
-    def mostrar_todos(self) -> List[Paciente]:
+    # def mostrar_todos(self) -> List[Paciente]:
+    #     try:
+    #         conn = get_connection()
+    #         cursor = conn.cursor()
+    #         cursor.execute('''
+    #                     SELECT nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios, id_paciente
+    #                     FROM Pacientes''')
+    #         filas = cursor.fetchall()
+    #         return [Paciente(*fila) for fila in filas]
+    #     except Exception as e:
+    #         print(f"❌ Error al mostrar pacientes: {e}")
+    #         return []
+    #     finally:
+    #         conn.close()
+    
+    def mostrar_pacientes():
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios, id_paciente FROM Pacientes")
-            # cursor.execute("SELECT * FROM Pacientes")
-            filas = cursor.fetchall()
-            return [Paciente(*fila) for fila in filas]
+            cursor.execute("SELECT * FROM Pacientes")
+            return cursor.fetchall()
         except Exception as e:
             print(f"❌ Error al mostrar pacientes: {e}")
             return []

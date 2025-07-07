@@ -1,6 +1,4 @@
-
 import re
-
 
 # Función de sanitización
 def sanitize_input(value: str) -> str:
@@ -13,22 +11,31 @@ def sanitize_input(value: str) -> str:
 
 # Listas válidas
 ocupaciones_validas = [
-    "Sin ocupación / Nunca trabajó", "Desempleado/a", "Jubilado/a", "Ama/o de casa",
-    "Estudiante", "Trabajador/a no cualificado/a", "Trabajador/a cualificado/a",
-    "Empleado/a administrativo/a o de oficina", "Técnico/a o profesional de nivel medio",
-    "Profesional universitario/a", "Directivo/a o Ejecutivo/a", "Empresario/a o autónomo/a",
-    "Agricultor/a o trabajador/a del campo", "Otro (especificar)"
+    "Jubilado",
+    "Estudiante",
+    "Trabajador no cualificado",
+    "Trabajador cualificado",
+    "Empleado de oficina",
+    "Profesional técnico",
+    "Profesional universitario",
+    "Directivo",
+    "Autónomo o empresario",
+    "Campo o agricultura"
 ]
+
 
 niveles_validos = [
-    "Sin escolarización", "Educación primaria incompleta", "Educación primaria completa",
-    "Educación secundaria incompleta", "Educación secundaria completa",
-    "Bachillerato o equivalente incompleto", "Bachillerato o equivalente completo",
-    "Estudios universitarios incompletos", "Estudios universitarios completos",
-    "Estudios de posgrado / máster", "Doctorado o equivalente"
+    "Sin estudios",
+    "Primaria",
+    "Secundaria",
+    "Bachillerato / FP Medio",
+    "FP Superior / Universidad incompleta",
+    "Universidad / Grado universitario",
+    "Máster / Posgrado",
+    "Doctorado"
 ]
 
-generos_validos = ["masculino", "femenino", "otro"]
+generos_validos = ["Masculino", "Femenino", "Otro"]
 
 # Funciones de validación
 
@@ -55,3 +62,20 @@ def validar_ocupacion(ocupacion: str) -> bool:
 def validar_nivel_estudios(nivel: str) -> bool:
     nivel = sanitize_input(nivel)
     return nivel in niveles_validos
+
+# Funciones interactivas
+
+def mostrar_opciones(lista):
+    for i, opcion in enumerate(lista, 1):
+        print(f"{i}. {opcion}")
+
+def seleccionar_opcion(lista, mensaje):
+    while True:
+        print(f"\n{mensaje}")
+        mostrar_opciones(lista)
+        entrada = input("Selecciona una opción (número): ").strip()
+        if entrada.isdigit():
+            idx = int(entrada) - 1
+            if 0 <= idx < len(lista):
+                return lista[idx]
+        print("❌ Opción no válida. Intenta de nuevo.")

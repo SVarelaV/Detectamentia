@@ -24,7 +24,7 @@ class GestorResultadoJuegos:
         print("2. 🔍 Buscar resultado por ID")
         print("3. 🗑️  Eliminar resultado por ID")
         print("4. 📋 Mostrar todos los resultados")
-        print("5. 🚪 Salir")
+        print("5. 🚪 Volver al menú princiapal.")
         print("=" * 50)
 
     def mostrar_resultado(self, rj):

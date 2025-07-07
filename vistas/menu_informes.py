@@ -16,7 +16,7 @@ class GestorInformes:
         print("2. 🔍 Buscar informe por ID")
         print("3. 🗑️  Eliminar informe por ID")
         print("4. 📋 Mostrar todos los informes")
-        print("5. 🚪 Salir")
+        print("5. 🚪 Volver al menú principal")
         print("=" * 60)
 
     def mostrar_informe(self, inf):

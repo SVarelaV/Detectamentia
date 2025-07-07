@@ -1,12 +1,13 @@
 
 from controlador.dominios.paciente import Paciente
 from controlador.gestores.pacientes import Pacientes
+import vistas.validacion_paciente as vp
 
 class GestorPacientes:
     """Gestor que maneja las operaciones sobre pacientes."""
 
     def __init__(self):
-        self.lista_pacientes = Pacientes()  # Conectado a base de datos
+        self.lista_pacientes = Pacientes()
 
     def agregar(self, paciente):
         if self.lista_pacientes.buscar(paciente.id_paciente):
@@ -22,9 +23,8 @@ class GestorPacientes:
         print("2. 🔍 Buscar paciente por ID")
         print("3. 🗑️  Eliminar paciente por ID")
         print("4. 📋 Mostrar todos los pacientes")
-        print("5. 🚪 Salir")
+        print("5. 🚪 Volver al menú principal")
         print("="*50)
-
 
     def mostrar_paciente(self, paciente: Paciente):
         print(f"{paciente.id_paciente}. {paciente.nombre} {paciente.apellido1} {paciente.apellido2} "
@@ -50,29 +50,49 @@ class GestorPacientes:
             else:
                 print("❌ Opción inválida. Intenta de nuevo.")
 
-
     def _agregar_paciente(self):
         try:
             print("\n➕ Agregar nuevo paciente")
+
             nombre = input("Nombre: ")
+            while not vp.validar_texto(nombre):
+                print("❌ Nombre inválido.")
+                nombre = input("Nombre: ")
+
             apellido1 = input("Primer apellido: ")
+            while not vp.validar_texto(apellido1):
+                print("❌ Apellido inválido.")
+                apellido1 = input("Primer apellido: ")
+
             apellido2 = input("Segundo apellido: ")
-            genero = input("Género: ")
-            edad = int(input("Edad: "))
+            while not vp.validar_texto(apellido2):
+                print("❌ Apellido inválido.")
+                apellido2 = input("Segundo apellido: ")
+
+            genero = vp.seleccionar_opcion(vp.generos_validos, "Selecciona el género")
+
+            edad_str = input("Edad (50-120): ")
+            while not vp.validar_edad(edad_str):
+                print("❌ Edad inválida. Debe ser entre 50 y 120.")
+                edad_str = input("Edad (50-120): ")
+            edad = int(edad_str)
+
             poblacion = input("Población: ")
-            ocupacion = input("Ocupación: ")
-            nivelEstudios = input("Nivel de estudios: ")
+            while not vp.validar_poblacion(poblacion):
+                print("❌ Población inválida.")
+                poblacion = input("Población: ")
+
+            ocupacion = vp.seleccionar_opcion(vp.ocupaciones_validas, "Selecciona la ocupación")
+            nivelEstudios = vp.seleccionar_opcion(vp.niveles_validos, "Selecciona el nivel de estudios")
 
             paciente = Paciente(nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
 
-            # Guardar en la BD
             if self.lista_pacientes.agregar(paciente):
-                print(f"✅ Paciente agregado correctamente.")
+                print("✅ Paciente agregado correctamente.")
             else:
                 print("❌ No se pudo agregar el paciente.")
         except Exception as e:
-            print(f"❌ Error: {e}")
-
+            print(f"❌ Error inesperado: {e}")
 
     def _buscar_paciente(self):
         try:

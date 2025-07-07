@@ -25,7 +25,7 @@ class GestorUsuarios:
         print("4. 📧 Buscar por email")
         print("5. 🎭 Buscar por rol")
         print("6. 📋 Mostrar todos los usuarios")
-        print("7. 🚪 Salir")
+        print("7. 🚪 Volver al menú princiapal")
         print("=" * 50)
 
     def mostrar_usuario(self, u):

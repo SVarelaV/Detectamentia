@@ -93,8 +93,6 @@ class Pacientes(ListaGen[Paciente]):
             return []
         finally:
             conn.close()
-    
-
 
     def existe(self, paciente: Paciente) -> bool:
         try:

@@ -1,7 +1,7 @@
-from controlador.gestores.menu_pacientes import GestorPacientes
-from controlador.gestores.menu_informes import GestorInformes
-from controlador.gestores.menu_resultadojuegos import GestorResultadoJuegos
-from controlador.gestores.menu_usuarios import GestorUsuarios
+from vistas.menu_pacientes import GestorPacientes
+from vistas.menu_informes import GestorInformes
+from vistas.menu_resultadojuegos import GestorResultadoJuegos
+from vistas.menu_usuarios import GestorUsuarios
 
 
 

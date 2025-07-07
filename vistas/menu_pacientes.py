@@ -51,6 +51,7 @@ class GestorPacientes:
             else:
                 print("❌ Opción inválida. Intenta de nuevo.")
 
+
     def _agregar_paciente(self):
         try:
             print("\n➕ Agregar nuevo paciente")
@@ -64,9 +65,15 @@ class GestorPacientes:
             nivelEstudios = input("Nivel de estudios: ")
 
             paciente = Paciente(nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
-            print(f"✅ Paciente agregado con ID: {paciente.id_paciente}")
+            
+            # ✅ Guardar en la BD
+            if self.lista_pacientes.agregar(paciente):
+                print(f"✅ Paciente agregado con ID: {paciente.id_paciente}")
+            else:
+                print("❌ No se pudo agregar el paciente.")
         except Exception as e:
             print(f"❌ Error: {e}")
+
 
     def _buscar_paciente(self):
         try:

@@ -69,7 +69,7 @@ class GestorPacientes:
                 print("❌ Apellido inválido.")
                 apellido2 = input("Segundo apellido: ")
 
-            genero = v.seleccionar_opcion(vp.generos_validos, "Selecciona el género")
+            genero = v.seleccionar_opcion(v.generos_validos, "Selecciona el género")
 
             edad_str = input("Edad (50-120): ")
             while not v.validar_edad(edad_str):

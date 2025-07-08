@@ -1,6 +1,6 @@
-
 from controlador.dominios.usuario import Usuario
 from controlador.gestores.usuarios import Usuarios
+import vistas.validacion as v
 
 class GestorUsuarios:
     """
@@ -58,16 +58,39 @@ class GestorUsuarios:
     def _agregar_usuario(self):
         try:
             print("\n➕ Nuevo usuario")
+
             nombre = input("Nombre: ")
+            while not v.validar_texto(nombre):
+                print("❌ Nombre inválido.")
+                nombre = input("Nombre: ")
+
             apellido1 = input("Primer apellido: ")
+            while not v.validar_texto(apellido1):
+                print("❌ Apellido inválido.")
+                apellido1 = input("Primer apellido: ")
+
             apellido2 = input("Segundo apellido: ")
-            rol = input("Rol (paciente/profesional): ")
+            while not v.validar_texto(apellido2):
+                print("❌ Apellido inválido.")
+                apellido2 = input("Segundo apellido: ")
+
+            rol = v.seleccionar_opcion(v.roles_validos, "Selecciona el rol")
+
             email = input("Email: ")
-            activo = input("¿Activo? (s/n): ").lower() == "s"
+            while not v.validar_email(email):
+                print("❌ Email inválido.")
+                email = input("Email: ")
+
+            activo_str = input("¿Activo? (s/n): ").lower()
+            while activo_str not in ["s", "n"]:
+                print("❌ Entrada inválida. Usa 's' o 'n'.")
+                activo_str = input("¿Activo? (s/n): ").lower()
+            activo = activo_str == "s"
 
             nuevo = Usuario(nombre, apellido1, apellido2, rol, email, activo)
             self.usuarios.agregar(nuevo)
-            print(f"✅ Usuario agregado con ID: {nuevo.id_usuario}")
+            print(f"✅ Usuario agregado")
+
         except Exception as e:
             print(f"❌ Error al agregar: {e}")
 
@@ -95,6 +118,9 @@ class GestorUsuarios:
     def _buscar_por_email(self):
         try:
             email = input("📧 Email del usuario: ")
+            while not v.validar_email(email):
+                print("❌ Email inválido.")
+                email = input("📧 Email del usuario: ")
             u = self.usuarios.buscar_por_email(email)
             if u:
                 self.mostrar_usuario(u)
@@ -105,7 +131,7 @@ class GestorUsuarios:
 
     def _buscar_por_rol(self):
         try:
-            rol = input("🎭 Rol a buscar (paciente/profesional): ")
+            rol = v.seleccionar_opcion(v.roles_validos, "Selecciona el rol a buscar")
             lista = self.usuarios.buscar_por_rol(rol)
             if lista:
                 for u in lista:

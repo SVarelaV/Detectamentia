@@ -36,6 +36,9 @@ niveles_validos = [
 
 generos_validos = ["Masculino", "Femenino", "Otro"]
 
+roles_validos = ["paciente", "profesional"]
+
+
 # Listas clínicas reutilizables
 frecuencias = ["Nunca", "Ocasional", "Frecuente"]
 calidades_sueno = ["Mala", "Regular", "Buena"]
@@ -85,6 +88,15 @@ def validar_entero_rango(valor: str, minimo: int, maximo: int) -> bool:
 
 def validar_fecha(fecha: str) -> bool:
     return bool(re.match(r"\d{2}-\d{2}-\d{4}", fecha.strip()))
+
+def validar_rol(rol: str) -> bool:
+    rol = sanitize_input(rol.lower())
+    return rol in roles_validos
+
+def validar_email(email: str) -> bool:
+    email = sanitize_input(email)
+    return bool(re.match(r'^[\w\.-]+@[\w\.-]+\.\w{2,4}$', email))
+
 
 # Funciones interactivas
 

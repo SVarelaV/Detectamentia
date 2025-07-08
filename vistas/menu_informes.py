@@ -123,7 +123,7 @@ class GestorInformes:
             )
 
             self.informes.agregar(nuevo)
-            print(f"✅ Informe agregado con ID: {nuevo.id_informe}")
+            print(f"✅ Informe agregado")
 
         except Exception as e:
             print(f"❌ Error al agregar informe: {e}")

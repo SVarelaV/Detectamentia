@@ -62,7 +62,7 @@ class GestorResultadoJuegos:
 
             nuevo = ResultadoJuego(juego, fecha, reaccion, aciertos, errores, intentos, total)
             self.resultados.agregar(nuevo)
-            print(f"✅ Resultado agregado con ID: {nuevo.id_resultado}")
+            print(f"✅ Resultado agregado")
         except Exception as e:
             print(f"❌ Error al agregar: {e}")
 

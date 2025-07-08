@@ -21,18 +21,23 @@ class Usuarios(ListaGen[Usuario]):
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute(
-                "INSERT INTO Usuarios (nombre, apellido1, apellido2, rol, email, activo) VALUES (?, ?, ?, ?, ?, ?)",
+                """
+                INSERT INTO Usuarios (nombre, apellido1, apellido2, rol, email, activo)
+                OUTPUT INSERTED.id_usuario
+                VALUES (?, ?, ?, ?, ?, ?)
+                """,
                 (
                     usuario.nombre, usuario.apellido1,
                     usuario.apellido2, usuario.rol, usuario.email, usuario.activo
                 )
             )
-
-            # Obtener el ID generado automáticamente por SQL Server
-            cursor.execute("SELECT SCOPE_IDENTITY()")
             usuario.id_usuario = cursor.fetchone()[0]
-
             conn.commit()
+
+            if not usuario.id_usuario:
+                print("❌ No se pudo obtener el ID del usuario insertado.")
+                return False
+
             self._elementos.append(usuario)
             return True
         except Exception as e:
@@ -40,6 +45,7 @@ class Usuarios(ListaGen[Usuario]):
             return False
         finally:
             conn.close()
+
 
 
     def eliminar(self, id_elemento: int) -> bool:

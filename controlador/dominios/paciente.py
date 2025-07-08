@@ -1,5 +1,6 @@
 class Paciente:
-    def __init__(self, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios, id_paciente=None):
+    def __init__(self, nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios,
+                id_usuario=None, id_informe=None, id_paciente=None):
         self._id_paciente = id_paciente
         self._nombre = nombre
         self._apellido1 = apellido1
@@ -9,6 +10,8 @@ class Paciente:
         self._poblacion = poblacion
         self._ocupacion = ocupacion
         self._nivelEstudios = nivelEstudios
+        self._id_usuario = id_usuario
+        self._id_informe = id_informe
 
     @property
     def id_paciente(self):
@@ -81,3 +84,19 @@ class Paciente:
     @nivelEstudios.setter
     def nivelEstudios(self, nivelEstudios):
         self._nivelEstudios = nivelEstudios
+        
+    @property
+    def id_usuario(self):
+        return self._id_usuario
+    
+    @id_usuario.setter
+    def id_usuario(self, id_usuario):
+        self._id_usuario = id_usuario
+        
+    @property
+    def id_informe(self):
+        return self._id_informe
+    
+    @id_informe.setter
+    def id_informe(self, id_informe):
+        self._id_informe = id_informe

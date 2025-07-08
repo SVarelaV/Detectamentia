@@ -23,7 +23,9 @@ class Informes(ListaGen[Informe]):
                     migrainas, hipertension, cardiopatia, depresionDiag, accidenteCerebrovascular,
                     trastornoSueno, horaSueno, calidadSueno, fumador, consumoAlcohol,
                     actividadFisica, nivelEstres, dietaSaludable, presionArterialSis, presionArterialDia
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                )
+                OUTPUT INSERTED.id_informe
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 informe.fechaRegistro, informe.antecFamiliaresAlzheimer, informe.diabetes,
                 informe.colesterol, informe.migrainas, informe.hipertension, informe.cardiopatia,
@@ -32,11 +34,13 @@ class Informes(ListaGen[Informe]):
                 informe.actividadFisica, informe.nivelEstres, informe.dietaSaludable,
                 informe.presionArterialSis, informe.presionArterialDia
             ))
-            # Obtener el ID generado por SQL Server
-            cursor.execute("SELECT SCOPE_IDENTITY()")
             informe.id_informe = cursor.fetchone()[0]
-
             conn.commit()
+
+            if not informe.id_informe:
+                print("❌ No se pudo obtener el ID del informe insertado.")
+                return False
+
             self._elementos.append(informe)
             return True
         except Exception as e:
@@ -44,6 +48,7 @@ class Informes(ListaGen[Informe]):
             return False
         finally:
             conn.close()
+
 
     def eliminar(self, id_elemento: int) -> bool:
         try:

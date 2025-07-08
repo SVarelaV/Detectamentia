@@ -20,19 +20,23 @@ class Pacientes(ListaGen[Paciente]):
             cursor.execute('''
                 INSERT INTO Pacientes (
                     nombre, apellido1, apellido2, genero, edad,
-                    poblacion, ocupacion, nivelEstudios
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    poblacion, ocupacion, nivelEstudios, id_usuario, id_informe
+                )
+                OUTPUT INSERTED.id_paciente
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ''', (
                 paciente.nombre, paciente.apellido1, paciente.apellido2,
                 paciente.genero, paciente.edad, paciente.poblacion,
-                paciente.ocupacion, paciente.nivelEstudios
+                paciente.ocupacion, paciente.nivelEstudios,
+                paciente.id_usuario, paciente.id_informe
             ))
-
-            # Recuperar el ID generado automáticamente
-            cursor.execute("SELECT SCOPE_IDENTITY()")
             paciente.id_paciente = cursor.fetchone()[0]
-
             conn.commit()
+
+            if not paciente.id_paciente:
+                print("❌ No se pudo obtener el ID del paciente insertado.")
+                return False
+
             self._elementos.append(paciente)
             return True
         except Exception as e:
@@ -63,12 +67,12 @@ class Pacientes(ListaGen[Paciente]):
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute("""
-            SELECT id_paciente, nombre, apellido1, apellido2, genero, edad,
-                poblacion, ocupacion, nivelEstudios
-            FROM Pacientes
-            WHERE id_paciente = ?
-        """, (id_elemento,))
-
+                SELECT nombre, apellido1, apellido2, genero, edad,
+                    poblacion, ocupacion, nivelEstudios,
+                    id_usuario, id_informe, id_paciente
+                FROM Pacientes
+                WHERE id_paciente = ?
+            """, (id_elemento,))
             fila = cursor.fetchone()
             if fila:
                 return Paciente(*fila)
@@ -83,9 +87,12 @@ class Pacientes(ListaGen[Paciente]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute('''
-                        SELECT nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios, id_paciente
-                        FROM Pacientes''')
+            cursor.execute("""
+                SELECT nombre, apellido1, apellido2, genero, edad,
+                    poblacion, ocupacion, nivelEstudios,
+                    id_usuario, id_informe, id_paciente
+                FROM Pacientes
+            """)
             filas = cursor.fetchall()
             return [Paciente(*fila) for fila in filas]
         except Exception as e:

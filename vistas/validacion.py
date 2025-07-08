@@ -23,7 +23,6 @@ ocupaciones_validas = [
     "Campo o agricultura"
 ]
 
-
 niveles_validos = [
     "Sin estudios",
     "Primaria",
@@ -36,6 +35,11 @@ niveles_validos = [
 ]
 
 generos_validos = ["Masculino", "Femenino", "Otro"]
+
+# Listas clínicas reutilizables
+frecuencias = ["Nunca", "Ocasional", "Frecuente"]
+calidades_sueno = ["Mala", "Regular", "Buena"]
+niveles_actividad = ["Sedentario", "Moderado", "Activo"]
 
 # Funciones de validación
 
@@ -62,6 +66,25 @@ def validar_ocupacion(ocupacion: str) -> bool:
 def validar_nivel_estudios(nivel: str) -> bool:
     nivel = sanitize_input(nivel)
     return nivel in niveles_validos
+
+def validar_binario(valor: str) -> bool:
+    return valor.strip() in ["0", "1"]
+
+def validar_opcion_numerica(valor: str, opciones: list) -> bool:
+    return valor.strip().isdigit() and int(valor) in opciones
+
+def validar_float_rango(valor: str, minimo: float, maximo: float) -> bool:
+    try:
+        v = float(valor.strip())
+        return minimo <= v <= maximo
+    except ValueError:
+        return False
+
+def validar_entero_rango(valor: str, minimo: int, maximo: int) -> bool:
+    return valor.strip().isdigit() and minimo <= int(valor) <= maximo
+
+def validar_fecha(fecha: str) -> bool:
+    return bool(re.match(r"\d{2}-\d{2}-\d{4}", fecha.strip()))
 
 # Funciones interactivas
 

@@ -1,7 +1,7 @@
 
 from controlador.dominios.paciente import Paciente
 from controlador.gestores.pacientes import Pacientes
-import vistas.validacion_paciente as vp
+import vistas.validacion as v
 
 class GestorPacientes:
     """Gestor que maneja las operaciones sobre pacientes."""
@@ -55,35 +55,35 @@ class GestorPacientes:
             print("\n➕ Agregar nuevo paciente")
 
             nombre = input("Nombre: ")
-            while not vp.validar_texto(nombre):
+            while not v.validar_texto(nombre):
                 print("❌ Nombre inválido.")
                 nombre = input("Nombre: ")
 
             apellido1 = input("Primer apellido: ")
-            while not vp.validar_texto(apellido1):
+            while not v.validar_texto(apellido1):
                 print("❌ Apellido inválido.")
                 apellido1 = input("Primer apellido: ")
 
             apellido2 = input("Segundo apellido: ")
-            while not vp.validar_texto(apellido2):
+            while not v.validar_texto(apellido2):
                 print("❌ Apellido inválido.")
                 apellido2 = input("Segundo apellido: ")
 
-            genero = vp.seleccionar_opcion(vp.generos_validos, "Selecciona el género")
+            genero = v.seleccionar_opcion(vp.generos_validos, "Selecciona el género")
 
             edad_str = input("Edad (50-120): ")
-            while not vp.validar_edad(edad_str):
+            while not v.validar_edad(edad_str):
                 print("❌ Edad inválida. Debe ser entre 50 y 120.")
                 edad_str = input("Edad (50-120): ")
             edad = int(edad_str)
 
             poblacion = input("Población: ")
-            while not vp.validar_poblacion(poblacion):
+            while not v.validar_poblacion(poblacion):
                 print("❌ Población inválida.")
                 poblacion = input("Población: ")
 
-            ocupacion = vp.seleccionar_opcion(vp.ocupaciones_validas, "Selecciona la ocupación")
-            nivelEstudios = vp.seleccionar_opcion(vp.niveles_validos, "Selecciona el nivel de estudios")
+            ocupacion = v.seleccionar_opcion(v.ocupaciones_validas, "Selecciona la ocupación")
+            nivelEstudios = v.seleccionar_opcion(v.niveles_validos, "Selecciona el nivel de estudios")
 
             paciente = Paciente(nombre, apellido1, apellido2, genero, edad, poblacion, ocupacion, nivelEstudios)
 

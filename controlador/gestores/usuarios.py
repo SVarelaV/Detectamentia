@@ -21,11 +21,11 @@ class Usuarios(ListaGen[Usuario]):
             conn = get_connection()
             cursor = conn.cursor()
             cursor.execute(
-                """
+                '''
                 INSERT INTO Usuarios (nombre, apellido1, apellido2, rol, email, activo)
                 OUTPUT INSERTED.id_usuario
                 VALUES (?, ?, ?, ?, ?, ?)
-                """,
+                ''',
                 (
                     usuario.nombre, usuario.apellido1,
                     usuario.apellido2, usuario.rol, usuario.email, usuario.activo
@@ -52,7 +52,12 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM Usuarios WHERE id_usuario = ?", (id_elemento,))
+            cursor.execute(
+                '''
+                DELETE FROM Usuarios
+                WHERE id_usuario = ?
+                ''', (id_elemento,)
+            )
             conn.commit()
             eliminado = cursor.rowcount > 0
             if eliminado:
@@ -69,7 +74,13 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario FROM Usuarios WHERE id_usuario = ?", (id_elemento,))
+            cursor.execute(
+                '''
+                SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario
+                FROM Usuarios
+                WHERE id_usuario = ?
+                ''', (id_elemento,)
+            )
             fila = cursor.fetchone()
             if fila:
                 return Usuario(*fila)
@@ -85,7 +96,12 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario FROM Usuarios")
+            cursor.execute(
+                '''
+                SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario
+                FROM Usuarios
+                '''
+            )
             filas = cursor.fetchall()
             return [Usuario(*fila) for fila in filas]
         except Exception as e:
@@ -99,7 +115,13 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT 1 FROM Usuarios WHERE id_usuario = ?", (usuario.id_usuario,))
+            cursor.execute(
+                '''
+                SELECT 1
+                FROM Usuarios
+                WHERE id_usuario = ?
+                ''', (usuario.id_usuario,)
+            )
             return cursor.fetchone() is not None
         except Exception as e:
             print(f"❌ Error al verificar existencia de usuario: {e}")
@@ -112,14 +134,17 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute('''
+            cursor.execute(
+                '''
                 UPDATE Usuarios 
                 SET nombre = ?, apellido1 = ?, apellido2 = ?, rol = ?, email = ?, activo = ?
                 WHERE id_usuario = ?
-            ''', (
-                usuario.nombre, usuario.apellido1, usuario.apellido2,
-                usuario.rol, usuario.email, usuario.activo, usuario.id_usuario
-            ))
+                ''',
+                (
+                    usuario.nombre, usuario.apellido1, usuario.apellido2,
+                    usuario.rol, usuario.email, usuario.activo, usuario.id_usuario
+                )
+            )
             conn.commit()
             return cursor.rowcount > 0
         except Exception as e:
@@ -133,7 +158,13 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario FROM Usuarios WHERE email = ?", (email,))
+            cursor.execute(
+                '''
+                SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario
+                FROM Usuarios
+                WHERE email = ?
+                ''', (email,)
+            )
             fila = cursor.fetchone()
             if fila:
                 return Usuario(*fila)
@@ -149,7 +180,13 @@ class Usuarios(ListaGen[Usuario]):
         try:
             conn = get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario FROM Usuarios WHERE rol = ?", (rol,))
+            cursor.execute(
+                '''
+                SELECT nombre, apellido1, apellido2, rol, email, activo, id_usuario
+                FROM Usuarios
+                WHERE rol = ?
+                ''', (rol,)
+            )
             filas = cursor.fetchall()
             return [Usuario(*fila) for fila in filas]
         except Exception as e:

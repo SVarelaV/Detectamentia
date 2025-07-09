@@ -1,46 +1,29 @@
-# login_simple.py
-from modelo.config import get_connection
+from controlador.gestores.seguridad_gestor import SeguridadGestor
 
-def login_basico():
-    print("\n🔐 LOGIN BÁSICO - DetectaMentIA")
-    email = input("📧 Email: ").strip()
-    password = input("🔑 Contraseña: ").strip()
+class LoginSistema:
+    def __init__(self):
+        self._seguridad = SeguridadGestor()
 
-    try:
-        conn = get_connection()
-        cursor = conn.cursor()
-        cursor.execute('''
-            SELECT u.nombre, u.apellido1, u.rol, u.activo
-            FROM Usuarios u
-            JOIN Seguridad s ON u.id_usuario = s.id_usuario
-            WHERE u.email = ? AND s.passwd = ?
-        ''', (email, password))
+    def autenticar(self):
+        print("\n🔐 INICIO DE SESIÓN - DetectaMentIA")
+        print("=" * 50)
+        email = input("📧 Email: ").strip()
+        password = input("🔑 Contraseña: ").strip()
 
-        fila = cursor.fetchone()
-        if fila is None:
-            print("❌ Usuario o contraseña incorrectos.")
+        usuario = self._seguridad.validar_credenciales(email, password)
+
+        if not usuario:
+            print("❌ Credenciales inválidas o usuario inactivo.")
             return None
 
-        nombre, apellido1, rol, activo = fila
-
-        if not activo:
-            print("⛔ Usuario inactivo. Contacte al administrador.")
-            return None
-
-        print(f"✅ Bienvenido, {nombre} {apellido1} ({rol})")
-        return True
-
-    except Exception as e:
-        print(f"❌ Error de autenticación: {e}")
-        return None
-    finally:
-        conn.close()
+        print(f"✅ Bienvenido, {usuario.nombre} {usuario.apellido1} ({usuario.rol})")
+        return usuario
 
 if __name__ == "__main__":
-    acceso = login_basico()
-    if acceso:
-        print("➡️ Acceso permitido al sistema")
+    login = LoginSistema()
+    usuario = login.autenticar()
+    if usuario:
+        print("➡️ Acceso permitido al sistema.")
     else:
-        print("🚪 Cerrando aplicación.")
-
+        print("🚪 Acceso denegado.")
 

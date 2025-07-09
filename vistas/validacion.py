@@ -7,11 +7,23 @@ def sanitize_input(value: str) -> str:
     return value.strip()
 
 # Listas válidas
+
+
 ocupaciones_validas = [
-    "Jubilado", "Estudiante", "Trabajador no cualificado", "Trabajador cualificado",
-    "Empleado de oficina", "Profesional técnico", "Profesional universitario",
-    "Directivo", "Autónomo o empresario", "Campo o agricultura"
+    "Sin ocupación",
+    "Desempleado/a",
+    "Jubilado/a",
+    "Ama/o de casa",
+    "Trabajador/a no cualificado/a",
+    "Trabajador/a cualificado/a",
+    "Empleado/a de oficina",
+    "Técnico/a de nivel medio",
+    "Profesional universitario/a",
+    "Directivo/a",
+    "Autónomo/a o empresario/a",
+    "Agricultor/a o trabajador/a del campo"
 ]
+
 
 niveles_validos = [
     "Sin estudios", "Primaria", "Secundaria", "Bachillerato / FP Medio",
@@ -20,7 +32,7 @@ niveles_validos = [
 ]
 
 generos_validos = ["Masculino", "Femenino", "Otro"]
-roles_validos = ["paciente", "profesional"]
+roles_validos = ["Paciente", "Profesional"]
 frecuencias = ["Nunca", "Ocasional", "Frecuente"]
 calidades_sueno = ["Mala", "Regular", "Buena"]
 niveles_actividad = ["Sedentario", "Moderado", "Activo"]
@@ -59,6 +71,18 @@ def validar_float_rango(valor: str, minimo: float, maximo: float) -> bool:
         return minimo <= v <= maximo
     except ValueError:
         return False
+
+def validar_passwd(passwd: str) -> str:
+    """
+    Valida que la contraseña tenga exactamente 6 caracteres y no contenga espacios.
+    """
+    passwd = sanitize_input(passwd)
+    if len(passwd) != 6:
+        raise ValueError("La contraseña debe tener exactamente 6 caracteres.")
+    if ' ' in passwd:
+        raise ValueError("La contraseña no debe contener espacios.")
+    return passwd
+
 
 # --- FUNCIONES INTERACTIVAS CENTRALIZADAS ---
 
@@ -118,3 +142,10 @@ def pedir_fecha():
         print("❌ Fecha inválida.")
         valor = input("Fecha (DD-MM-YYYY): ")
     return valor
+
+def pedir_passwd() -> str:
+    password = input("Contraseña (6 caracteres sin espacios): ").strip()
+    while not validar_passwd(passwd):
+        print("❌ Contraseña inválida. Debe tener exactamente 6 caracteres y sin espacios.")
+        passwd = input("Contraseña (6 caracteres sin espacios): ").strip()
+    return password

@@ -10,5 +10,3 @@ if __name__ == "__main__":
         sistema.ejecutar()
     else:
         print("🚪 Acceso denegado. Saliendo del sistema.")
-
-

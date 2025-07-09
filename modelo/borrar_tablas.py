@@ -4,7 +4,7 @@ def eliminar_tablas():
     conn = get_connection()
     cursor = conn.cursor()
 
-    # Orden corregido: hijos → padres
+
     tablas = ["Seguridad", "ResultadoJuegos", "Informes", "Pacientes", "Usuarios"]
 
     for tabla in tablas:

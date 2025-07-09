@@ -32,7 +32,7 @@ class GestorAltas:
             print("❌ Error al registrar el usuario.")
             return
         print(f"✅ Usuario creado con ID {usuario.id_usuario}")
-        print(f"DEBUG ➤ ID del usuario insertado: {usuario.id_usuario}")
+        print(f"➤ ID del usuario insertado: {usuario.id_usuario}")
 
         # --- Alta de Paciente ---
         print("\n🩺 Alta de Paciente")
@@ -76,9 +76,9 @@ class GestorAltas:
         if not self.informes.agregar(informe):
             print("❌ Error al registrar el informe.")
             return
-        print(f"DEBUG ➤ ID del informe insertado: {informe.id_informe}")
+        print(f"➤ ID del informe insertado: {informe.id_informe}")
 
-        # Asociar claves foráneas
+
         paciente = Paciente(
             nombre, apellido1, apellido2, genero, edad, poblacion,
             ocupacion, nivelEstudios,

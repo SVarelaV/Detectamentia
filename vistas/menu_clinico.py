@@ -9,7 +9,12 @@ from controlador.gestores.informes import Informes
 import vistas.validacion as v
 
 
-class MenuIntegrado:
+class MenuClinico:
+    """
+    Menú Clínico principal de la aplicación DetectaMentIA.
+    Gestiona flujos de trabajo combinados y permite acceso a funciones clínicas clave.
+    """
+
     def __init__(self):
         self.menu_usuarios = GestorUsuarios()
         self.menu_pacientes = GestorPacientes()
@@ -21,15 +26,13 @@ class MenuIntegrado:
         self.informes = Informes()
 
     def mostrar_menu(self):
-        print("\n🌐 MENÚ INTEGRADO - DetectaMentIA")
+        print("\n🌐 MENÚ CLÍNICO - DetectaMentIA")
         print("=" * 60)
-        print("1. Alta completa (usuario + paciente + informe)")
-        print("2. Completar alta con usuario existente")
-        print("3. 👥 Gestión de Usuarios")
-        print("4. 🧠 Gestión de Pacientes")
-        print("5. 📄 Gestión de Informes")
-        print("6. 🎮 Gestión de Resultados de Juegos")
-        print("7. 🚪 Salir")
+        print("1. Alta completa de paciente")
+        print("2. Consultar estado clínico de un paciente")
+        print("3. Evaluar riesgo y recomendaciones (en construcción)")
+        print("4. Ver estadísticas generales del sistema (en construcción)")
+        print("5. 🚪 Salir")
         print("=" * 60)
 
     def ejecutar(self):
@@ -39,32 +42,20 @@ class MenuIntegrado:
 
             if opcion == "1":
                 self.altas.ejecutar()
-
             elif opcion == "2":
-                self.completar_alta()
-
+                self.consultar_estado()
             elif opcion == "3":
-                self.menu_usuarios.ejecutar()
-
+                print("🔧 Esta funcionalidad está en desarrollo. Próximamente disponible.")
             elif opcion == "4":
-                self.menu_pacientes.ejecutar()
-
+                print("📊 Esta sección aún no ha sido implementada.")
             elif opcion == "5":
-                self.menu_informes.ejecutar()
-
-            elif opcion == "6":
-                self.menu_juegos.ejecutar()
-
-            elif opcion == "7":
                 print("👋 Gracias por usar DetectaMentIA.")
                 break
-
             else:
                 print("❌ Opción inválida. Intenta de nuevo.")
 
-    def completar_alta(self):
-        print("\n🔗 COMPLETAR ALTA A PARTIR DE USUARIO EXISTENTE")
-
+    def consultar_estado(self):
+        print("\n🔎 CONSULTA DE ESTADO CLÍNICO")
         email = input("📧 Introduce el email del usuario: ")
         if not v.validar_email(email):
             print("❌ Email inválido.")
@@ -77,24 +68,24 @@ class MenuIntegrado:
 
         print(f"✅ Usuario encontrado: {usuario.nombre} {usuario.apellido1} ({usuario.rol})")
 
-        # Buscar paciente vinculado
         paciente = next((p for p in self.pacientes.mostrar_todos() if p.id_usuario == usuario.id_usuario), None)
-
         if not paciente:
-            print("\n🩺 No tiene paciente asociado. Procediendo con alta clínica...")
-            self.menu_pacientes._agregar_paciente()
-        else:
-            print(f"👁️ Usuario ya tiene paciente registrado con ID {paciente.id_paciente}")
+            print("❌ No hay paciente asociado a este usuario.")
+            return
 
-            # Buscar si tiene informe
-            if paciente.id_informe is None or not self.informes.buscar(paciente.id_informe):
-                print("\n🧬 No tiene informe clínico. Procediendo a registrar uno...")
-                self.menu_informes._agregar_informe()
-            else:
-                print("ℹ️ Este usuario ya tiene informe clínico registrado.")
+        print(f"🧠 Paciente ID: {paciente.id_paciente} | {paciente.nombre} {paciente.apellido1} {paciente.apellido2} | Edad: {paciente.edad} | Género: {paciente.genero}")
+
+        informe = self.informes.buscar(paciente.id_informe)
+        if not informe:
+            print("⚠️ Este paciente aún no tiene informe clínico registrado.")
+            return
+
+        print("\n📄 Informe Clínico:")
+        print(f"📅 Fecha: {informe.fechaRegistro} | Alzheimer en familia: {informe.antecFamiliaresAlzheimer} | Sueño: {informe.horaSueno}h ({informe.calidadSueno})")
+        print(f"🩺 Presión arterial: {informe.presionArterialSis}/{informe.presionArterialDia} | Nivel de estrés: {informe.nivelEstres}")
 
 def main():
-    menu = MenuIntegrado()
+    menu = MenuClinico()
     try:
         menu.ejecutar()
     except KeyboardInterrupt:

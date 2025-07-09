@@ -1,4 +1,3 @@
-# gestor/seguridad_gestor.py
 from modelo.config import get_connection
 from controlador.dominios.seguridad import Seguridad
 from controlador.gestores.usuarios import Usuarios
@@ -30,5 +29,5 @@ class SeguridadGestor:
         credenciales = self.buscar_por_id_usuario(usuario.id_usuario)
         if credenciales and credenciales.passwd == password:
             return usuario
-
         return None
+

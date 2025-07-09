@@ -59,27 +59,11 @@ class GestorUsuarios:
         try:
             print("\n➕ Nuevo usuario")
 
-            nombre = input("Nombre: ")
-            while not v.validar_texto(nombre):
-                print("❌ Nombre inválido.")
-                nombre = input("Nombre: ")
-
-            apellido1 = input("Primer apellido: ")
-            while not v.validar_texto(apellido1):
-                print("❌ Apellido inválido.")
-                apellido1 = input("Primer apellido: ")
-
-            apellido2 = input("Segundo apellido: ")
-            while not v.validar_texto(apellido2):
-                print("❌ Apellido inválido.")
-                apellido2 = input("Segundo apellido: ")
-
+            nombre = v.pedir_texto_validado("Nombre: ")
+            apellido1 = v.pedir_texto_validado("Primer apellido: ")
+            apellido2 = v.pedir_texto_validado("Segundo apellido: ")
             rol = v.seleccionar_opcion(v.roles_validos, "Selecciona el rol")
-
-            email = input("Email: ")
-            while not v.validar_email(email):
-                print("❌ Email inválido.")
-                email = input("Email: ")
+            email = v.pedir_email()
 
             activo_str = input("¿Activo? (s/n): ").lower()
             while activo_str not in ["s", "n"]:
@@ -117,10 +101,7 @@ class GestorUsuarios:
 
     def _buscar_por_email(self):
         try:
-            email = input("📧 Email del usuario: ")
-            while not v.validar_email(email):
-                print("❌ Email inválido.")
-                email = input("📧 Email del usuario: ")
+            email = v.pedir_email()
             u = self.usuarios.buscar_por_email(email)
             if u:
                 self.mostrar_usuario(u)

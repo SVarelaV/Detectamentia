@@ -1,6 +1,6 @@
 from controlador.dominios.informe import Informe
 from controlador.gestores.informes import Informes
-from vistas import validacion as v
+import vistas.validacion as v
 
 class GestorInformes:
     """
@@ -52,68 +52,35 @@ class GestorInformes:
         try:
             print("➕ Agregar nuevo informe")
 
-            fechaRegistro = input("Fecha de registro (DD-MM-YYYY): ")
-            while not v.validar_fecha(fechaRegistro):
-                print("❌ Formato inválido. Usa DD-MM-YYYY.")
-                fechaRegistro = input("Fecha de registro (DD-MM-YYYY): ")
+            fechaRegistro = v.pedir_fecha()
 
-            def pedir_binario(mensaje):
-                valor = input(mensaje)
-                while not v.validar_binario(valor):
-                    print("❌ Valor inválido. Usa 1 (Sí) o 0 (No).")
-                    valor = input(mensaje)
-                return int(valor)
-
-            def pedir_entero_positivo(mensaje):
-                valor = input(mensaje)
-                while not valor.isdigit() or int(valor) < 0:
-                    print("❌ Debe ser un número entero mayor o igual a 0.")
-                    valor = input(mensaje)
-                return int(valor)
-
-            def pedir_float_rango(mensaje, min_val, max_val):
-                valor = input(mensaje)
-                while not v.validar_float_rango(valor, min_val, max_val):
-                    print(f"❌ Valor fuera de rango ({min_val}-{max_val}).")
-                    valor = input(mensaje)
-                return float(valor)
-
-            def pedir_entero_rango(mensaje, min_val, max_val):
-                valor = input(mensaje)
-                while not v.validar_entero_rango(valor, min_val, max_val):
-                    print(f"❌ Valor fuera de rango ({min_val}-{max_val}).")
-                    valor = input(mensaje)
-                return int(valor)
-
-            antecFamiliaresAlzheimer = pedir_binario("Antecedentes familiares Alzheimer (1: Sí, 0: No): ")
-            diabetes = pedir_binario("Diabetes (1: Sí, 0: No): ")
-            colesterol = pedir_binario("Colesterol (1: Sí, 0: No): ")
+            antecFamiliaresAlzheimer = v.pedir_binario("Antecedentes familiares Alzheimer")
+            diabetes = v.pedir_binario("Diabetes")
+            colesterol = v.pedir_binario("Colesterol")
 
             migrañas_str = v.seleccionar_opcion(v.frecuencias, "Selecciona el nivel de migrañas")
             migrainas = v.frecuencias.index(migrañas_str)
 
-            hipertension = pedir_binario("Hipertensión (1: Sí, 0: No): ")
-            cardiopatia = pedir_binario("Cardiopatía (1: Sí, 0: No): ")
-            depresionDiag = pedir_binario("Depresión diagnosticada (1: Sí, 0: No): ")
-            accidenteCerebrovascular = pedir_entero_positivo("ACV (0 si no, o número de episodios): ")
-            trastornoSueno = pedir_binario("Trastorno del sueño (1: Sí, 0: No): ")
-            horaSueno = pedir_float_rango("Horas de sueño: ", 0, 24)
+            hipertension = v.pedir_binario("Hipertensión")
+            cardiopatia = v.pedir_binario("Cardiopatía")
+            depresionDiag = v.pedir_binario("Depresión diagnosticada")
+            accidenteCerebrovascular = v.pedir_entero_rango("ACV", 0, 20)
+            trastornoSueno = v.pedir_binario("Trastorno del sueño")
+            horaSueno = v.pedir_float_rango("Horas de sueño", 0, 24)
 
             calidadSueno_str = v.seleccionar_opcion(v.calidades_sueno, "Selecciona la calidad del sueño")
             calidadSueno = v.calidades_sueno.index(calidadSueno_str)
 
-            fumador = pedir_binario("Fumador (1: Sí, 0: No): ")
-
+            fumador = v.pedir_binario("Fumador")
             consumoAlcohol_str = v.seleccionar_opcion(v.frecuencias, "Frecuencia de consumo de alcohol")
             consumoAlcohol = v.frecuencias.index(consumoAlcohol_str)
-
             actividadFisica_str = v.seleccionar_opcion(v.niveles_actividad, "Nivel de actividad física")
             actividadFisica = v.niveles_actividad.index(actividadFisica_str)
 
-            nivelEstres = pedir_entero_rango("Nivel de estrés (1-10): ", 1, 10)
-            dietaSaludable = pedir_binario("Dieta saludable (1: Sí, 0: No): ")
-            presionArterialSis = pedir_entero_rango("Presión sistólica: ", 80, 250)
-            presionArterialDia = pedir_entero_rango("Presión diastólica: ", 40, 150)
+            nivelEstres = v.pedir_entero_rango("Nivel de estrés", 1, 10)
+            dietaSaludable = v.pedir_binario("Dieta saludable")
+            presionArterialSis = v.pedir_entero_rango("Presión sistólica", 80, 250)
+            presionArterialDia = v.pedir_entero_rango("Presión diastólica", 40, 150)
 
             nuevo = Informe(
                 fechaRegistro, antecFamiliaresAlzheimer, diabetes, colesterol, migrainas,

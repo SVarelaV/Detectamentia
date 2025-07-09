@@ -1,4 +1,3 @@
-
 from controlador.dominios.paciente import Paciente
 from controlador.gestores.pacientes import Pacientes
 import vistas.validacion as v
@@ -54,34 +53,12 @@ class GestorPacientes:
         try:
             print("\n➕ Agregar nuevo paciente")
 
-            nombre = input("Nombre: ")
-            while not v.validar_texto(nombre):
-                print("❌ Nombre inválido.")
-                nombre = input("Nombre: ")
-
-            apellido1 = input("Primer apellido: ")
-            while not v.validar_texto(apellido1):
-                print("❌ Apellido inválido.")
-                apellido1 = input("Primer apellido: ")
-
-            apellido2 = input("Segundo apellido: ")
-            while not v.validar_texto(apellido2):
-                print("❌ Apellido inválido.")
-                apellido2 = input("Segundo apellido: ")
-
+            nombre = v.pedir_texto_validado("Nombre: ")
+            apellido1 = v.pedir_texto_validado("Primer apellido: ")
+            apellido2 = v.pedir_texto_validado("Segundo apellido: ")
             genero = v.seleccionar_opcion(v.generos_validos, "Selecciona el género")
-
-            edad_str = input("Edad (50-120): ")
-            while not v.validar_edad(edad_str):
-                print("❌ Edad inválida. Debe ser entre 50 y 120.")
-                edad_str = input("Edad (50-120): ")
-            edad = int(edad_str)
-
-            poblacion = input("Población: ")
-            while not v.validar_poblacion(poblacion):
-                print("❌ Población inválida.")
-                poblacion = input("Población: ")
-
+            edad = v.pedir_entero_rango("Edad", 50, 120)
+            poblacion = v.pedir_texto_validado("Población: ")
             ocupacion = v.seleccionar_opcion(v.ocupaciones_validas, "Selecciona la ocupación")
             nivelEstudios = v.seleccionar_opcion(v.niveles_validos, "Selecciona el nivel de estudios")
 

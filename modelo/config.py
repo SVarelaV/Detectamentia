@@ -1,6 +1,10 @@
 import pyodbc
 
+
+_conectado = False
+
 def get_connection():
+    global _conectado
     DRIVER = '{ODBC Driver 17 for SQL Server}'
     SERVER = 'localhost\\SQLEXPRESS'
     DATABASE = 'Detectamentia'
@@ -12,11 +16,16 @@ def get_connection():
             f'DATABASE={DATABASE};'
             f'Trusted_Connection={TRUSTED_CONNECTION};'
         )
-        print("✅ Conexión exitosa a la base de datos SQL Server.")
+        if not _conectado:
+            print("✅ Conexión exitosa a la base de datos SQL Server.")
+            _conectado = True
         return conn
     except Exception as e:
-        print("Ocurrió un error al conectar a SQL Server: ", e)
+        print("❌ Error de conexión a SQL Server: ", e)
         return None
+
+
+
 
 # if __name__ == "__main__":
 #     conn = get_connection()

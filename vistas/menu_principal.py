@@ -2,7 +2,6 @@ from vistas.menu_usuarios import GestorUsuarios
 from vistas.menu_pacientes import GestorPacientes
 from vistas.menu_informes import GestorInformes
 from vistas.menu_resultadojuegos import GestorResultadoJuegos
-from vistas.menu_altas import GestorAltas
 from vistas.menu_clinico import MenuClinico
 
 

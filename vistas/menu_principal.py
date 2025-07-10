@@ -17,7 +17,7 @@ class MenuPrincipal:
         print("\n🧠✨ BIENVENIDO A DETECTAMENTIA ✨🧠")
         print("=" * 60)
         print("Seleccione una opción para comenzar:")
-        print("1️⃣  Gestión por entidad (CRUD por módulo)")
+        print("1️⃣  Gestión por entidad")
         print("2️⃣  Menú Clínico (flujos combinados de trabajo)")
         print("3️⃣  🚪 Salir del sistema")
         print("=" * 60)

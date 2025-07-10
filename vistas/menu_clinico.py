@@ -30,9 +30,10 @@ class MenuClinico:
         print("=" * 60)
         print("1. Alta completa de paciente")
         print("2. Consultar estado clínico de un paciente")
-        print("3. Evaluar riesgo y recomendaciones (en construcción)")
-        print("4. Ver estadísticas generales del sistema (en construcción)")
-        print("5. 🚪 Salir")
+        print("3. Listar pacientes con datos clínicos")
+        print("4. Evaluar riesgo y recomendaciones (en construcción)")
+        print("5. Ver estadísticas generales del sistema (en construcción)")
+        print("6. 🚪 Salir")
         print("=" * 60)
 
     def ejecutar(self):
@@ -45,10 +46,12 @@ class MenuClinico:
             elif opcion == "2":
                 self.consultar_estado()
             elif opcion == "3":
-                print("🔧 Esta funcionalidad está en desarrollo. Próximamente disponible.")
+                self.listar_pacientes_con_estado()
             elif opcion == "4":
-                print("📊 Esta sección aún no ha sido implementada.")
+                print("🔧 Esta funcionalidad está en desarrollo. Próximamente disponible.")
             elif opcion == "5":
+                print("📊 Esta sección aún no ha sido implementada.")
+            elif opcion == "6":
                 print("👋 Gracias por usar DetectaMentIA.")
                 break
             else:
@@ -83,6 +86,23 @@ class MenuClinico:
         print("\n📄 Informe Clínico:")
         print(f"📅 Fecha: {informe.fechaRegistro} | Alzheimer en familia: {informe.antecFamiliaresAlzheimer} | Sueño: {informe.horaSueno}h ({informe.calidadSueno})")
         print(f"🩺 Presión arterial: {informe.presionArterialSis}/{informe.presionArterialDia} | Nivel de estrés: {informe.nivelEstres}")
+
+    def listar_pacientes_con_estado(self):
+        print("\n📋 LISTADO DE PACIENTES CON INFORME CLÍNICO")
+        pacientes = self.pacientes.mostrar_todos()
+        if not pacientes:
+            print("🕳️ No hay pacientes registrados.")
+            return
+
+        for paciente in pacientes:
+            informe = self.informes.buscar(paciente.id_informe)
+            if informe:
+                alzheimer_fam = "Sí" if informe.antecFamiliaresAlzheimer else "No"
+                print(f"🧠 {paciente.id_paciente} - {paciente.nombre} {paciente.apellido1} ({paciente.edad} años)")
+                print(f"   📝 Informe ID: {informe.id_informe} | 📅 Fecha: {informe.fechaRegistro} | Sueño: {informe.horaSueno}h ({informe.calidadSueno})")
+                print(f"   🩺 PA: {informe.presionArterialSis}/{informe.presionArterialDia} | Estrés: {informe.nivelEstres} | Alzheimer fam.: {alzheimer_fam}")
+                print("-" * 60)
+
 
 def main():
     menu = MenuClinico()

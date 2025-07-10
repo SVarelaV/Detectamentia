@@ -54,10 +54,6 @@ Desarrollar una herramienta que:
 4. Se ejecuta el modelo predictivo (en desarrollo).
 5. El profesional accede al dashboard para evaluar riesgos y recomendaciones.
 
----
-
-## 📁 Estructura de carpetas
-
 
 ---
 

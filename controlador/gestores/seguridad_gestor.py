@@ -30,4 +30,3 @@ class SeguridadGestor:
         if credenciales and credenciales.passwd == password:
             return usuario
         return None
-
